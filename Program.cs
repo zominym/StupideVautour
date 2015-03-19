@@ -10,21 +10,26 @@ namespace StupideVautour
     {
         static void Main(string[] args)
         {
-
+            Humain player = new Humain();
             int a;
             Console.WriteLine("Combien de joueurs IA en plus de vous ? ( 1~4 )");
             while (!int.TryParse(Console.ReadLine(), out a) || a > 4 || a < 1 )
             {
+                Console.WriteLine("ERREUR : Saisie non conforme.");
                 Console.WriteLine("Combien de joueurs IA en plus de vous ? ( 1~4 )");
             }
-            Console.WriteLine("Ajout de " + a + " joueurs Ordinateur.");
-            Joueur[] players = new IA[1 + a];
-            players[0] = new Humain();
+            Console.WriteLine("Ajout de " + a + " joueurs Ordinateur...");
+            List<IA> IAs;
+            for (int i = 0; i < a; i++)
+            {
+                IAs.Add(new IA(i));
+            }
 
-            Console.WriteLine("Création et mélange d'un jeu de cartes.");
+                Console.WriteLine("Création et mélange d'un jeu de cartes...");
             Talon talon = new Talon();
-            talon.shuffle();
-            
+
+            Console.WriteLine("Début du jeu !");
+
             
             Console.ReadLine();
 
