@@ -19,6 +19,7 @@ namespace StupideVautour
                 Console.WriteLine("Combien de joueurs IA en plus de vous ? ( 1~4 )");
             }
             Console.WriteLine("Ajout de " + a + " joueurs Ordinateur...");
+            List<Joueur> test = new List<Joueur>();
             List<IA> IAs = new List<IA>();
             for (int i = 0; i < a; i++)
             {
@@ -29,7 +30,22 @@ namespace StupideVautour
             Talon talon = new Talon();
 
             Console.WriteLine("Début du jeu !");
-                        
+
+            CarteVS carte;
+            for (int tour = 1; tour <= 15; tour++ )
+            {
+                carte = talon.tireCarte();
+                player.play(carte);
+                foreach (IA ia in IAs)
+                {
+                    IAs.play(carte);
+                }
+            }
+
+            Console.WriteLine("Fin du jeu !");
+            Console.WriteLine("Et voici le classement :");
+
+
             Console.ReadLine();
 
         }
