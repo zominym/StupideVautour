@@ -20,7 +20,7 @@ namespace StupideVautour
             }
             Console.WriteLine("Ajout de " + a + " joueurs Ordinateur...");
             List<IA> IAs = new List<IA>();
-            for (int i = 1; i < a; i++)
+            for (int i = 0; i < a; i++)
             {
                 IAs.Add(new IA(i));
             }
@@ -29,8 +29,7 @@ namespace StupideVautour
             Talon talon = new Talon();
 
             Console.WriteLine("Début du jeu !");
-
-            
+                        
             Console.ReadLine();
 
         }

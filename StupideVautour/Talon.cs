@@ -8,7 +8,7 @@ namespace StupideVautour
 {
     class Talon
     {
-        List<CarteVS> cartes;
+        List<CarteVS> cartes = new List<CarteVS>();
         public Talon()
         {
             for (int i = -5; i <= -1; i++)
