@@ -74,22 +74,7 @@ namespace StupideVautour
             }
             return false;
 
-        }
-
-        public CartePoints poseCarte(int val)
-        {
-            foreach (CartePoints carte in main)
-            {
-                if (carte.getVal() == val)
-                {
-                    CartePoints cartePose = carte;
-                    main.Remove(carte);
-                    return cartePose;
-
-                }
-            }
-            return null;
-        }
+        }     
 
         public void giveCard(CarteVS carte)
         {

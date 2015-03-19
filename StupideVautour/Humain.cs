@@ -37,10 +37,19 @@ namespace StupideVautour
             {
                 Console.WriteLine("ERREUR : Saisie non conforme.");
                 Console.WriteLine("Quelle carte voulez-vous jouer ? (1~15)");
-            }           
-            CartePoints carteAJouee = this.poseCarte(a);
-            carteJouees.Add(carteAJouee);
-            return carteAJouee;
+            }
+            CartePoints carteAJouer = new CartePoints(0);
+            foreach (CartePoints carte in main)
+            {
+                if (carte.getVal() == a)
+                {
+                    carteAJouer = new CartePoints(carte.getVal());
+                    carteJouees.Add(carteAJouer);
+                    main.Remove(carte);
+                    
+                }
+            }            
+            return carteAJouer;
         }
       
        
