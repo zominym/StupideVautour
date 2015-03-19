@@ -11,8 +11,8 @@ namespace StupideVautour
 
 
         public IA(int i)
+        :base(i)
         {
-            ID = i;
             switch (ID)
             {
                 case 0: name = "BOT_Alan"; break;

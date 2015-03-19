@@ -12,14 +12,13 @@ namespace StupideVautour
     {
         List<CarteVS> cartesRecup;
         List<CartePoints> cartesMain;
-        int ID;
-        string name;
+        protected int ID;
+        protected string name;
 
 
-        public Joueur(int id,string s)
+        public Joueur(int id)
         {
             ID = id;
-            name = s;
             for (int i = 0 ; i <=15 ; i++)
             {
                 cartesMain.Add(new CartePoints(i));

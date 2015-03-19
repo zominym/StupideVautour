@@ -10,6 +10,7 @@ namespace StupideVautour
     {
 
         public Humain()
+        : base( -1 )
         {
             Console.WriteLine("\tQuel est votre nom ?");
             string a = Console.ReadLine();
