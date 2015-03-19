@@ -14,6 +14,8 @@ namespace StupideVautour
         protected List<CartePoints> main = new List<CartePoints>();
         protected int ID;
         protected string name;
+        protected int points;
+        protected List<CartePoints> carteJouees;
 
 
         public Joueur(int id)
@@ -24,19 +26,42 @@ namespace StupideVautour
                 main.Add(new CartePoints(i));
             }
         }
+ 
+        public string getName()
+        {
+            return name;
+        }
 
         public int getPoints()
         {
-            int i = 0;
-            foreach (CarteVS carte in pot)
-            {
-                i += carte.getVal();
-            }
-            return i;
+            return points;
         }
 
+        public void setPoints(int i)
+        {
+            this.points = i;
+        }
 
+        public List<CartePoints> getCarteJouees()
+        {
+            return this.carteJouees;
+        }
+
+        public int getId()
+        {
+            return this.ID;
+        }
         public abstract CartePoints play();
-    
+        
+        public void afficheMain()
+        {
+            Console.WriteLine("Voici les cartes restantent dans votre main :");
+            Console.WriteLine("Il vous reste " + main.Count() + " carte(s) dans votre main");
+            for (int i = 0; i < main.Count();i++)
+            {
+                Console.WriteLine("Element numero :" + i + "valeur de la carte : " + main.ElementAt(i).getVal());
+            }
+
+        }
     }
 }

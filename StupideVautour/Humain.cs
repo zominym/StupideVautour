@@ -10,7 +10,7 @@ namespace StupideVautour
     {
 
         public Humain()
-        : base( -1 )
+        : base( 0 )
         {
             Console.WriteLine("Quel est votre nom ?");
             string a = Console.ReadLine();
@@ -23,21 +23,28 @@ namespace StupideVautour
             name = a;
             Console.WriteLine("Joueur " + name + " a rejoint la partie.");
         }
+        
+
         public override CartePoints play()
         {
-            Console.WriteLine("Voici les cartes restantent dans votre main :");
+            afficheMain();
             int a;
-            for (int i = 0; i < main.Count();i++)
-            {
-                Console.WriteLine("Element numero :" + i + "valeur de la carte : " + main.ElementAt(i).getVal());
-            }
-            Console.WriteLine("Indiquez l'index de la carte à jouer");
-            while (!int.TryParse(Console.ReadLine(), out a) || a > 0 || a < main.Count())
+            bool carteExiste;
+            Console.WriteLine("Indiquez la valeur de la carte à jouer"); 
+            /*
+             * 
+             Rrajouter le choix de la carte en fonction de la valeur et non de l'index
+             
+             */
+            while (!int.TryParse(Console.ReadLine(), out a) || a > 0 || a < main.Count()|| !carteExiste)
             {
                 Console.WriteLine("ERREUR : Saisie non conforme.");
                 Console.WriteLine("Indiquez l'index de la carte à jouer");
             }
-            return main.ElementAt(a);
+            CartePoints carteAJouee = main.ElementAt(a);
+            main.RemoveAt(a);
+            carteJouees.Add(carteAJouee);
+            return carteAJouee;
         }
       
        
