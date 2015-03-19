@@ -37,7 +37,7 @@ namespace StupideVautour
             
 
             /* BOUCLE DE JEU (15 TOURS) */
-            for (int tour = 1; tour <= 15; tour++ )
+            for (int tour = 1; tour <= 15; tour++)
             {
                 Console.WriteLine();
                 Console.WriteLine("----- Tour " + tour + " ! -----");
@@ -160,6 +160,7 @@ namespace StupideVautour
                 else return x.PartName.CompareTo(y.PartName);
             })
             */
+            Console.WriteLine("DEBUG : Le joueur a " + player.getPoints() + "points.");
 
             Console.WriteLine();
             Console.WriteLine("----- Fin du jeu ! -----");

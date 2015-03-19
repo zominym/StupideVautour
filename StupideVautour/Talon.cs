@@ -8,7 +8,6 @@ namespace StupideVautour
 {
     class Talon
     {
-        protected int nbCartes = 15;
         List<CarteVS> cartes = new List<CarteVS>();
         public Talon()
         {
@@ -23,10 +22,12 @@ namespace StupideVautour
         }
         public CarteVS tireCarte()
         {
+            CarteVS temp = new CarteVS(0);
             Random i = new Random();
-            int val = (int)i.Next(nbCartes);
-            return cartes.ElementAt(val);
-            nbCartes--;
+            int val = (int)i.Next(cartes.Count());
+            temp = cartes.ElementAt(val);
+            cartes.RemoveAt(val);
+            return temp;
         }
     }
 }

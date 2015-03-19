@@ -20,6 +20,7 @@ namespace StupideVautour
 
         public Joueur(int id)
         {
+            points = 0;
             ID = id;
             for (int i = 1; i <=15 ; i++)
             {
