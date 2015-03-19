@@ -14,5 +14,10 @@ namespace StupideVautour
         {
             val = i;
         }
-    }
+
+        public int getVal()
+        {
+            return this.val;
+        }
+   }
 }

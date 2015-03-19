@@ -9,7 +9,7 @@ namespace StupideVautour
     class IA : Joueur
     {
 
-
+        int lvDif;
         public IA(int i)
         :base(i)
         {
@@ -23,7 +23,7 @@ namespace StupideVautour
             }
             Console.WriteLine("Ordinateur " + name + " a rejoint la partie.");
         }
-        public CartePoints play()
+        public override CartePoints play()
         {
             return null;
         }

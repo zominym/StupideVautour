@@ -25,6 +25,17 @@ namespace StupideVautour
             }
         }
 
+        public int getPoints()
+        {
+            int i = 0;
+            foreach (CarteVS carte in pot)
+            {
+                i += carte.getVal();
+            }
+            return i;
+        }
+
+
         public abstract CartePoints play();
     
     }

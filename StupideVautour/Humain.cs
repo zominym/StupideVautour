@@ -23,7 +23,7 @@ namespace StupideVautour
             name = a;
             Console.WriteLine("Joueur " + name + " a rejoint la partie.");
         }
-        public CartePoints play()
+        public override CartePoints play()
         {
             Console.WriteLine("Voici les cartes restantent dans votre main :");
             int a;
@@ -39,6 +39,7 @@ namespace StupideVautour
             }
             return main.ElementAt(a);
         }
+      
        
     }
 }
