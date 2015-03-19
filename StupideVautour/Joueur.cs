@@ -15,7 +15,7 @@ namespace StupideVautour
         protected int ID;
         protected string name;
         protected int points;
-        protected List<CartePoints> carteJouees;
+        protected List<CartePoints> carteJouees = new List<CartePoints>();
 
 
         public Joueur(int id)

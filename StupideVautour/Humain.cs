@@ -46,7 +46,7 @@ namespace StupideVautour
                     carteAJouer = new CartePoints(carte.getVal());
                     carteJouees.Add(carteAJouer);
                     main.Remove(carte);
-                    
+                    break;
                 }
             }            
             return carteAJouer;
