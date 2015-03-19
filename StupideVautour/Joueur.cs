@@ -10,8 +10,8 @@ namespace StupideVautour
 
     class Joueur
     {
-        List<CarteVS> cartesRecup;
-        List<CartePoints> cartesMain;
+        List<CarteVS> pot;
+        List<CartePoints> main;
         protected int ID;
         protected string name;
 
@@ -21,7 +21,7 @@ namespace StupideVautour
             ID = id;
             for (int i = 0 ; i <=15 ; i++)
             {
-                cartesMain.Add(new CartePoints(i));
+                main.Add(new CartePoints(i));
             }
         }
 

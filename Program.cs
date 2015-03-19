@@ -19,8 +19,8 @@ namespace StupideVautour
                 Console.WriteLine("Combien de joueurs IA en plus de vous ? ( 1~4 )");
             }
             Console.WriteLine("Ajout de " + a + " joueurs Ordinateur...");
-            List<IA> IAs;
-            for (int i = 0; i < a; i++)
+            List<IA> IAs = new List<IA>();
+            for (int i = 1; i < a; i++)
             {
                 IAs.Add(new IA(i));
             }
