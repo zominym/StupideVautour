@@ -12,8 +12,10 @@ namespace StupideVautour
         public Humain()
         : base( 0 )
         {
-            Console.WriteLine("Quel est votre nom ?");
+            Console.WriteLine("Quel est votre nom ? (20 chars)");
             string a = Console.ReadLine();
+            a = a.Trim();
+            if (a.Length > 20) { a = a.Remove(20); }
             while (a[0] == 'B' && a[1] == 'O' && a[2] == 'T' && a[3] == '_')
             {
                 Console.WriteLine("ERREUR : Le préfixe 'BOT_' est réservé aux ordinateurs.");
@@ -30,11 +32,11 @@ namespace StupideVautour
         {
             afficheMain();
             int a = -1;
-            Console.WriteLine("Indiquez la valeur de la carte à jouer");
-            while (!int.TryParse(Console.ReadLine(), out a) || a > 0 || a <= 15 || !estDansMain(a))
+            Console.WriteLine("Quelle carte voulez-vous jouer ? (1~15)");
+            while (!int.TryParse(Console.ReadLine(), out a) && a > 0 && a <= 15 && !estDansMain(a))
             {
                 Console.WriteLine("ERREUR : Saisie non conforme.");
-                Console.WriteLine("Indiquez la valeur de la carte à jouer");
+                Console.WriteLine("Quelle carte voulez-vous jouer ? (1~15)");
             }           
             CartePoints carteAJouee = this.poseCarte(a);
             carteJouees.Add(carteAJouee);
