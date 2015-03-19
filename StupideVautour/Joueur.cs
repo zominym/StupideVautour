@@ -47,7 +47,7 @@ namespace StupideVautour
             return this.carteJouees;
         }
 
-        public int getId()
+        public int getID()
         {
             return this.ID;
         }
@@ -62,6 +62,24 @@ namespace StupideVautour
                 Console.WriteLine("Element numero :" + i + "valeur de la carte : " + main.ElementAt(i).getVal());
             }
 
+        }
+        public bool estDansMain(int val)
+        {
+            foreach (CartePoints carte in main)
+            {
+                if (carte.getVal() == val)
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
+
+        public void giveCard(CarteVS carte)
+        {
+            pot.Add(carte);
+            points += carte.getVal();
         }
     }
 }
