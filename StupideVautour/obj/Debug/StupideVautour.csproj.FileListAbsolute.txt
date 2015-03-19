@@ -1,0 +1,9 @@
+C:\Users\Marc\AppData\Local\Temporary Projects\StupideVautour\bin\Debug\StupideVautour.exe.config
+C:\Users\Marc\AppData\Local\Temporary Projects\StupideVautour\bin\Debug\StupideVautour.exe
+C:\Users\Marc\AppData\Local\Temporary Projects\StupideVautour\bin\Debug\StupideVautour.pdb
+C:\Users\Marc\AppData\Local\Temporary Projects\StupideVautour\obj\Debug\StupideVautour.csprojResolveAssemblyReference.cache
+C:\Users\Marc\AppData\Local\Temporary Projects\StupideVautour\obj\Debug\StupideVautour.exe
+C:\Users\Marc\AppData\Local\Temporary Projects\StupideVautour\obj\Debug\StupideVautour.pdb
+C:\Users\Marc\Documents\Programmation\Visual Studio 2013\Projects\StupideVautour\StupideVautour\bin\Debug\StupideVautour.exe.config
+C:\Users\Marc\Documents\Programmation\Visual Studio 2013\Projects\StupideVautour\StupideVautour\obj\Debug\StupideVautour.exe
+C:\Users\Marc\Documents\Programmation\Visual Studio 2013\Projects\StupideVautour\StupideVautour\obj\Debug\StupideVautour.pdb
