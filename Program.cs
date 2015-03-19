@@ -114,19 +114,51 @@ namespace StupideVautour
                         }
                     }
                     if (max == 0) {/* REJOUER */}
-                    else { /* donner la carte au joueur qui a mis le max */ }
+                    else
+                    {
+                        if (ID == 0) { player.giveCard(carte); }
+                        else { IAs[ID].giveCard(carte); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
+                    }
                 }
                 else
                 {
-                    /* pareil avec min */
+                    int min = 20;
+                    int ID = -1;
+                    for (int i = 0; i < nbJoueurs; i++)
+                    {
+                        if (cartes[i] != null)
+                        {
+                            if (cartes[i].getVal() < min)
+                            {
+                                min = cartes[i].getVal();
+                                ID = i;
+                            }
+                        }
+                    }
+                    if (min == 20) { /* REJOUER */}
+                    else
+                    {
+                        if (ID == 0) { player.giveCard(carte); }
+                        else { IAs[ID].giveCard(carte); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
+                    }
                 }
-
-
             }
+
+
+
+            /*
+            parts.Sort(delegate(Part x, Part y)
+            {
+                if (x.PartName == null && y.PartName == null) return 0;
+                else if (x.PartName == null) return -1;
+                else if (y.PartName == null) return 1;
+                else return x.PartName.CompareTo(y.PartName);
+            })
+             */
+
 
             Console.WriteLine("----- Fin du jeu ! -----");
             Console.WriteLine("Et voici le classement :");
-            IAs.Sort();
             int indexIA = 0;
             int indexJ = 0;
             int playerScore = player.getPoints();
