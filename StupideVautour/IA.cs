@@ -23,5 +23,11 @@ namespace StupideVautour
             }
             Console.WriteLine("Ordinateur " + name + " a rejoint la partie.");
         }
+        public CartePoints play()
+        {
+            return null;
+        }
     }
+
+    
 }

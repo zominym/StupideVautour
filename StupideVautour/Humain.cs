@@ -23,10 +23,21 @@ namespace StupideVautour
             name = a;
             Console.WriteLine("Joueur " + name + " a rejoint la partie.");
         }
-        public CartePoints play(List<CartePoints> carte)
+        public CartePoints play()
         {
-            
-
+            Console.WriteLine("Voici les cartes restantent dans votre main :");
+            int a;
+            for (int i = 0; i < main.Count();i++)
+            {
+                Console.WriteLine("Element numero :" + i + "valeur de la carte : " + main.ElementAt(i).getVal());
+            }
+            Console.WriteLine("Indiquez l'index de la carte à jouer");
+            while (!int.TryParse(Console.ReadLine(), out a) || a > 0 || a < main.Count())
+            {
+                Console.WriteLine("ERREUR : Saisie non conforme.");
+                Console.WriteLine("Indiquez l'index de la carte à jouer");
+            }
+            return main.ElementAt(a);
         }
        
     }
