@@ -20,7 +20,7 @@ namespace StupideVautour
             }
             Console.WriteLine("Ajout de " + nbJoueurs + " joueurs Ordinateur...");
             List<IA> IAs = new List<IA>();
-            for (int i = 0; i < nbJoueurs; i++)
+            for (int i = 1; i < nbJoueurs; i++)
             {
                 IAs.Add(new IA(i));
             }
@@ -31,14 +31,97 @@ namespace StupideVautour
             Console.WriteLine("----- Début du jeu ! -----");
 
             CarteVS carte;
+
+
+            /* BOUCLE DE JEU (15 TOURS) */
             for (int tour = 1; tour <= 15; tour++ )
             {
+
+                /* TIRAGE ET AFFICHAGE DE LA CARTE DU TALON */
                 carte = talon.tireCarte();
-                player.play();
+                if (carte.isSouris()) { Console.WriteLine("Carte souris retournée ! Sa valeur est :"); }
+                else { Console.WriteLine("Carte vautour retournée ! Sa valeur est :"); }
+                Console.Write(carte.getVal() + ".");
+
+                
+                /* CHAQUE JOUEUR JOUE UNE CARTE */
+                CartePoints[] cartes = new CartePoints[nbJoueurs];
+                cartes[0] = player.play();
                 foreach (IA ia in IAs)
                 {
-                    IAs.play();
+                    cartes[ia.getID()] = ia.play();
                 }
+
+
+                /* AFFICHAGE DES CARTES JOUEES */
+                Console.WriteLine("Le joueurs "+player.getName()+"joue sa carte :"+cartes[0]+".");
+                foreach (IA ia in IAs)
+                {
+                    Console.WriteLine("Le joueur "+ia.getName()+" joue sa carte :"+cartes[ia.getID()]+".");
+                }
+
+
+                /* SUPPRESSION DES CARTES DOUBLONS */
+                for (int num = 1; num <= 15; num++)
+                {
+                    bool existeDeja = false;
+                    bool existeDeuxFois = false;
+                    for (int i = 0; i < nbJoueurs; i++)
+                    {
+                        if (cartes[i] != null)
+                        {
+                            if (cartes[i].getVal() == num)
+                            {
+                                if (!existeDeuxFois)
+                                {
+                                    if (existeDeja) { existeDeuxFois = true; }
+                                    else { existeDeja = true; }
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < nbJoueurs; i++)
+                    {
+                        if (cartes[i] != null)
+                        {
+                            if (cartes[i].getVal() == num)
+                            {
+                                if (existeDeuxFois)
+                                {
+                                    cartes[i] = null;
+                                }
+                            }
+                        }
+                    }
+
+                }
+                
+
+                /* CALCUL VAINQUEUR */
+                if (carte.isSouris())
+                {
+                    int max = 0;
+                    int ID = -1;
+                    for (int i = 0; i < nbJoueurs; i++)
+                    {
+                        if (cartes[i] != null)
+                        {
+                            if (cartes[i].getVal() > max)
+                            {
+                                max = cartes[i].getVal();
+                                ID = i;
+                            }
+                        }
+                    }
+                    if (max == 0) {/* REJOUER */}
+                    else { /* donner la carte au joueur qui a mis le max */ }
+                }
+                else
+                {
+                    /* pareil avec min */
+                }
+
+
             }
 
             Console.WriteLine("----- Fin du jeu ! -----");
