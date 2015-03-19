@@ -33,7 +33,7 @@ namespace StupideVautour
             afficheMain();
             int a = -1;
             Console.WriteLine("Quelle carte voulez-vous jouer ? (1~15)");
-            while (!int.TryParse(Console.ReadLine(), out a) && a > 0 && a <= 15 && !estDansMain(a))
+            while (!int.TryParse(Console.ReadLine(), out a) && a > 0 && a <= 15 || !estDansMain(a))
             {
                 Console.WriteLine("ERREUR : Saisie non conforme.");
                 Console.WriteLine("Quelle carte voulez-vous jouer ? (1~15)");

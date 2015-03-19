@@ -20,18 +20,17 @@ namespace StupideVautour
             }
             Console.WriteLine("Ajout de " + nbJoueurs + " joueurs Ordinateur...");
             List<IA> IAs = new List<IA>();
-            for (int i = 1; i < nbJoueurs; i++)
+            for (int i = 1; i <= nbJoueurs; i++)
             {
                 IAs.Add(new IA(i));
             }
-
-                Console.WriteLine("Création et mélange d'un jeu de cartes...");
+            Console.WriteLine("Création et mélange d'un jeu de cartes...");
             Talon talon = new Talon();
 
             Console.WriteLine("----- Début du jeu ! -----");
 
             CarteVS carte;
-
+            
 
             /* BOUCLE DE JEU (15 TOURS) */
             for (int tour = 1; tour <= 15; tour++ )

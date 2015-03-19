@@ -26,10 +26,7 @@ namespace StupideVautour
         }
         public override CartePoints play()
         {
-            CartePoints carteAJouee = main.ElementAt(10);
-            main.RemoveAt(10);
-            carteJouees.Add(carteAJouee);
-            return carteAJouee;
+            return new CartePoints(10);
         }
     }
 
