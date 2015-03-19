@@ -22,7 +22,7 @@ namespace StupideVautour
                 case 4: name = "BOT_Dean"; break;
                 default: name = "BOT_ERROR"; break;
             }
-            Console.WriteLine("Ordinateur " + name + " a rejoint la partie.");
+            Console.WriteLine("Joueur " + name + " a rejoint la partie.");
         }
         public override CartePoints play()
         {

@@ -28,7 +28,10 @@ namespace StupideVautour
             Console.WriteLine("Création et mélange d'un jeu de cartes...");
             Talon talon = new Talon();
 
+
+            Console.WriteLine();
             Console.WriteLine("----- Début du jeu ! -----");
+            Console.WriteLine();
 
             CarteVS carte;
             
@@ -36,12 +39,14 @@ namespace StupideVautour
             /* BOUCLE DE JEU (15 TOURS) */
             for (int tour = 1; tour <= 15; tour++ )
             {
+                Console.WriteLine();
+                Console.WriteLine("----- Tour " + tour + " ! -----");
 
                 /* TIRAGE ET AFFICHAGE DE LA CARTE DU TALON */
                 carte = talon.tireCarte();
-                if (carte.isSouris()) { Console.WriteLine("Carte souris retournée ! Sa valeur est :"); }
-                else { Console.WriteLine("Carte vautour retournée ! Sa valeur est :"); }
-                Console.Write(carte.getVal() + ".");
+                if (carte.isSouris()) { Console.Write("Carte SOURIS retournée ! Sa valeur est : "); }
+                else { Console.Write("Carte VAUTOUR retournée ! Sa valeur est : "); }
+                Console.WriteLine(carte.getVal() + ".");
 
                 
                 /* CHAQUE JOUEUR JOUE UNE CARTE */
@@ -54,10 +59,10 @@ namespace StupideVautour
 
 
                 /* AFFICHAGE DES CARTES JOUEES */
-                Console.WriteLine("Le joueurs "+player.getName()+"joue sa carte :"+cartes[0]+".");
+                Console.WriteLine("Le joueurs " + player.getName() + " joue sa carte :" + cartes[0].getVal() + ".");
                 foreach (IA ia in IAs)
                 {
-                    Console.WriteLine("Le joueur "+ia.getName()+" joue sa carte :"+cartes[ia.getID()]+".");
+                    Console.WriteLine("Le joueur " + ia.getName() + " joue sa carte :" + cartes[ia.getID()].getVal() + ".");
                 }
 
 
@@ -116,8 +121,8 @@ namespace StupideVautour
                     if (max == 0) {/* REJOUER */}
                     else
                     {
-                        if (ID == 0) { player.giveCard(carte); }
-                        else { IAs[ID].giveCard(carte); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
+                        if (ID == 0) { player.giveCard(carte); Console.WriteLine("La carte va à " + player.getName() + "."); }
+                        else { IAs[ID].giveCard(carte); Console.WriteLine("La carte va à " + IAs[ID].getName() + "."); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
                     }
                 }
                 else
@@ -156,8 +161,9 @@ namespace StupideVautour
             })
             */
 
-
+            Console.WriteLine();
             Console.WriteLine("----- Fin du jeu ! -----");
+            Console.WriteLine(); 
             Console.WriteLine("Et voici le classement :");
 
 

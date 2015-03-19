@@ -12,13 +12,13 @@ namespace StupideVautour
         public Humain()
         : base( 0 )
         {
-            Console.WriteLine("Quel est votre nom ? (20 chars)");
+            Console.WriteLine("Quel est votre nom ? (4~20 chars)");
             string a = Console.ReadLine();
             a = a.Trim();
             if (a.Length > 20) { a = a.Remove(20); }
-            while (a[0] == 'B' && a[1] == 'O' && a[2] == 'T' && a[3] == '_')
+            while (a.Length < 4 || (a[0] == 'B' && a[1] == 'O' && a[2] == 'T' && a[3] == '_'))
             {
-                Console.WriteLine("ERREUR : Le préfixe 'BOT_' est réservé aux ordinateurs.");
+                Console.WriteLine("ERREUR DE SAISIE. (Le préfixe 'BOT_' est réservé aux ordinateurs.)");
                 Console.WriteLine("Quel est votre nom ?");
                 a = Console.ReadLine();
             }

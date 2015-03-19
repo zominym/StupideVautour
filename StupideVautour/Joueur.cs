@@ -55,13 +55,12 @@ namespace StupideVautour
         
         public void afficheMain()
         {
-            Console.WriteLine("Voici les cartes restantent dans votre main :");
-            Console.WriteLine("Il vous reste " + main.Count() + " carte(s) dans votre main");
+            Console.WriteLine("Il reste " + main.Count() + " carte(s) dans votre main :");
             for (int i = 0; i < main.Count();i++)
             {
-                Console.WriteLine("Valeur de la carte : " + main.ElementAt(i).getVal());
+                Console.Write(main.ElementAt(i).getVal() + "   ");
             }
-
+            Console.WriteLine();
         }
         public bool estDansMain(int val)
         {
