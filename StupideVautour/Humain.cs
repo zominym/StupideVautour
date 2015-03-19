@@ -23,5 +23,11 @@ namespace StupideVautour
             name = a;
             Console.WriteLine("Joueur " + name + " a rejoint la partie.");
         }
+        public CartePoints play(List<CartePoints> carte)
+        {
+            
+
+        }
+       
     }
 }

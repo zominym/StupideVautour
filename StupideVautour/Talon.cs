@@ -20,7 +20,7 @@ namespace StupideVautour
                 cartes.Add(new CarteVS(i));
             }
         }
-        public CarteVS TireCarte()
+        public CarteVS tireCarte()
         {
             Random i = new Random();
             int val = (int)i.Next(16);

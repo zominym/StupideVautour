@@ -8,7 +8,7 @@ namespace StupideVautour
 {
     
 
-    class Joueur
+    abstract class Joueur 
     {
         List<CarteVS> pot = new List<CarteVS>();
         List<CartePoints> main = new List<CartePoints>();
@@ -25,9 +25,7 @@ namespace StupideVautour
             }
         }
 
-        public int Play(CartePoints carte)
-        {
-            return 0;
-        }
+        public abstract CartePoints play(List<CartePoints> carte);
+    
     }
 }
