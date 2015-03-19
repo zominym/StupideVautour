@@ -8,5 +8,11 @@ namespace StupideVautour
 {
     class CartePoints
     {
+        private int val;
+
+        public CartePoints(int i)
+        {
+            val = i;
+        }
     }
 }
