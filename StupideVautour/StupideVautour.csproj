@@ -44,6 +44,9 @@
     <Compile Include="..\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
+    <Compile Include="Humain.cs" />
+    <Compile Include="IA.cs" />
+    <Compile Include="Joueur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
