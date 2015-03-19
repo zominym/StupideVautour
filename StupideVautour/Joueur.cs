@@ -21,7 +21,7 @@ namespace StupideVautour
         public Joueur(int id)
         {
             ID = id;
-            for (int i = 0 ; i <=15 ; i++)
+            for (int i = 1; i <=15 ; i++)
             {
                 main.Add(new CartePoints(i));
             }
@@ -59,7 +59,7 @@ namespace StupideVautour
             Console.WriteLine("Il vous reste " + main.Count() + " carte(s) dans votre main");
             for (int i = 0; i < main.Count();i++)
             {
-                Console.WriteLine("Element numero :" + i + "valeur de la carte : " + main.ElementAt(i).getVal());
+                Console.WriteLine("Valeur de la carte : " + main.ElementAt(i).getVal());
             }
 
         }
