@@ -24,38 +24,19 @@ namespace StupideVautour
             Console.WriteLine("Joueur " + name + " a rejoint la partie.");
         }
         
-        public bool estDansMain(int val)
-        {
-            foreach(CartePoints carte in main)
-            {
-                if(carte.getVal()==val)
-                {
-                    return true;
-                }
-            }
-            return false;
-
-        }
+       
 
         public override CartePoints play()
         {
             afficheMain();
             int a = -1;
             Console.WriteLine("Indiquez la valeur de la carte à jouer");
-            while (!estDansMain(a))
+            while (!int.TryParse(Console.ReadLine(), out a) || a > 0 || a <= 15 || !estDansMain(a))
             {
-                while (!int.TryParse(Console.ReadLine(), out a) || a > 0 || a <= 15)
-                {
-                    Console.WriteLine("ERREUR : Saisie non conforme.");
-                    Console.WriteLine("Indiquez l'index de la carte à jouer");
-                }
-                if(!estDansMain(a))
-                {
-                    Console.WriteLine("ERREUR : Cette carte n'est pas dans votre main.");
-                }
-            }
-            CartePoints carteAJouee = main.ElementAt(a);
-            main.RemoveAt(a);
+                Console.WriteLine("ERREUR : Saisie non conforme.");
+                Console.WriteLine("Indiquez la valeur de la carte à jouer");
+            }           
+            CartePoints carteAJouee = this.poseCarte(a);
             carteJouees.Add(carteAJouee);
             return carteAJouee;
         }
