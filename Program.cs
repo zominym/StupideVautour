@@ -16,7 +16,7 @@ namespace StupideVautour
             while (!int.TryParse(Console.ReadLine(), out nbJoueurs) || nbJoueurs > 4 || nbJoueurs < 1 )
             {
                 Console.WriteLine("ERREUR : Saisie non conforme.");
-                Console.WriteLine("Combien de joueurs IA en plus de vous ? ( 1~4 )");
+                Console.WriteLine("Combien de joueurs IA en plus de vous ? ( 1~4 )");  /* FAIRE LE "AJOUTER UNE IA (0=débile, 1=random) */
             }
             Console.WriteLine("Ajout de " + nbJoueurs + " joueurs Ordinateur...");
             nbJoueurs++;

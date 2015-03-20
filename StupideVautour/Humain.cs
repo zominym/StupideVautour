@@ -12,7 +12,7 @@ namespace StupideVautour
         public Humain()
         : base( 0 )
         {
-            Console.WriteLine("Quel est votre nom ? (4~20 chars)");
+            Console.WriteLine("Quel est votre nom ? (3~20 chars)");
             string a = Console.ReadLine();
             a = a.Trim();
             if (a.Length > 20) { a = a.Remove(20); }
