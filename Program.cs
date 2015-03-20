@@ -122,7 +122,7 @@ namespace StupideVautour
                     else
                     {
                         if (ID == 0) { player.giveCard(carte); Console.WriteLine("La carte va à " + player.getName() + "."); }
-                        else { IAs[ID].giveCard(carte); Console.WriteLine("La carte va à " + IAs[ID].getName() + "."); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
+                        else { ID--; IAs.ElementAt(ID).giveCard(carte); Console.WriteLine("La carte va à " + IAs.ElementAt(ID).getName() + "."); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
                     }
                 }
                 else
@@ -143,8 +143,8 @@ namespace StupideVautour
                     if (min == 20) { /* REJOUER */}
                     else
                     {
-                        if (ID == 0) { player.giveCard(carte); }
-                        else { IAs[ID].giveCard(carte); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
+                        if (ID == 0) { player.giveCard(carte); Console.WriteLine("La carte va à " + player.getName() + "."); }
+                        else { ID--; IAs.ElementAt(ID).giveCard(carte); Console.WriteLine("La carte va à " + IAs.ElementAt(ID).getName() + "."); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
                     }
                 }
             }
@@ -160,7 +160,6 @@ namespace StupideVautour
                 else return x.PartName.CompareTo(y.PartName);
             })
             */
-            Console.WriteLine("DEBUG : Le joueur a " + player.getPoints() + "points.");
 
             Console.WriteLine();
             Console.WriteLine("----- Fin du jeu ! -----");
@@ -168,53 +167,58 @@ namespace StupideVautour
             Console.WriteLine("Et voici le classement :");
 
 
+            /*
             IAs.Sort(   delegate(IA x, IA y)
                         {
                             if (x.getPoints() == y.getPoints()) return 0;
                             else if (x.getPoints() > y.getPoints()) return -1;
                             else return 1;
                         });
+
+            
             for (int i = 0; i <nbJoueurs; i++)
             {
-                if (player.getPoints() >= IAs[0].getPoints())
+                if (player.getPoints() >= IAs.First().getPoints())
                 {
                     Console.WriteLine("N° " + i + ": " + player.getName() + " avec " + player.getPoints() + " points.");
                     player.setPoints(-20);
                 }
                 else
                 {
-                    Console.WriteLine("N° " + i + ": " + IAs[0].getName() + " avec " + IAs[0].getPoints() + " points.");
-                    IAs.RemoveAt(0);
+                    Console.WriteLine("N° " + i + ": " + IAs.First().getName() + " avec " + IAs.First().getPoints() + " points.");
+                    IAs.Remove(IAs.First());
                 }
             }
+            */
 
-            //int playerScore = player.getPoints();
-            //for (int i = 0; i < nbJoueurs; i++)
-            //{
-            //    int maxIA = -20;
-            //    IA stock = IAs[1];
-            //    foreach (IA ia in IAs)
-            //    {
-            //        if (ia.getPoints() > maxIA)
-            //        {
-            //            stock = ia;
-            //        }
-            //        if (maxIA > playerScore)
-            //        {
-            //            Console.WriteLine("N° " + i + ": " + IAs[i].getName() + " avec " + IAs[i].getPoints() + " points.");
-            //            IAs.Remove(stock);
-            //        }
-            //        else
-            //        {
-            //            Console.WriteLine("N° " + i + ": " + player.getName() + " avec " + player.getPoints() + " points.");
-            //            playerScore = -20;
-            //        }
-            //    }
-            //}
-            //if (playerScore != -20)
-            //{
-            //    Console.WriteLine("N° " + nbJoueurs + ": " + player.getName() + " avec " + player.getPoints() + " points.");
-            //}
+            int playerScore = player.getPoints();
+            for (int i = 0; i < nbJoueurs; i++)
+            {
+                IA stock = new IA();
+                int maxIA = -20;
+                foreach (IA ia in IAs)
+                {
+                    if (ia.getPoints() >= maxIA)
+                    {
+                        stock = ia;
+                        maxIA = ia.getPoints();
+                    }
+                }
+                if (maxIA > playerScore)
+                {
+                    Console.WriteLine("N° " + i + ": " + IAs.ElementAt(i).getName() + " avec " + IAs.ElementAt(i).getPoints() + " points.");
+                    IAs.Remove(stock);
+                }
+                else
+                {
+                    Console.WriteLine("N° " + i + ": " + player.getName() + " avec " + player.getPoints() + " points.");
+                    playerScore = -20;
+                }
+            }
+            if (playerScore != -20)
+            {
+                Console.WriteLine("N° " + nbJoueurs + ": " + player.getName() + " avec " + player.getPoints() + " points.");
+            }
 
             Console.ReadLine();
 

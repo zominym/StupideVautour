@@ -11,6 +11,13 @@ namespace StupideVautour
 
         int lvDif;
         CarteVS carteTalon = null;
+
+        public IA()
+            :base(-1)
+        {
+            // TODO: Complete member initialization
+        }
+
         public IA(int i)
         :base(i)
         {
@@ -24,6 +31,7 @@ namespace StupideVautour
             }
             Console.WriteLine("Joueur " + name + " a rejoint la partie.");
         }
+
         public override CartePoints play()
         {
             return new CartePoints(10);
