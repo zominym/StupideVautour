@@ -206,7 +206,7 @@ namespace StupideVautour
                 }
                 if (maxIA > playerScore)
                 {
-                    Console.WriteLine("N° " + i + ": " + IAs.ElementAt(i).getName() + " avec " + IAs.ElementAt(i).getPoints() + " points.");
+                    Console.WriteLine("N° " + i + ": " + stock.getName() + " avec " + stock.getPoints() + " points.");
                     IAs.Remove(stock);
                 }
                 else
