@@ -29,12 +29,36 @@ namespace StupideVautour
                 case 4: name = "BOT_Dean"; break;
                 default: name = "BOT_ERROR"; break;
             }
+            this.lvDif = 0;
             Console.WriteLine("Joueur " + name + " a rejoint la partie.");
         }
 
+        public void setDifficulty(int i)
+        {
+            this.lvDif = i;
+        }
         public override CartePoints play()
         {
-            return new CartePoints(10);
+            switch (lvDif)
+            {
+                case 0:
+                    return new CartePoints(10);
+                case 1:
+                    return PlayFacile();
+                default:
+                    return null;
+            }
+           
+        }
+
+        private CartePoints PlayFacile()
+        {
+            CartePoints temp = new CartePoints(0);
+            Random i = new Random();
+            int val = (int)i.Next(main.Count());
+            temp = main.ElementAt(val);
+            main.RemoveAt(val);
+            return temp;
         }
     }
 
