@@ -52,7 +52,6 @@ namespace StupideVautour
         {
             return this.ID;
         }
-        public abstract CartePoints play();
         
         public void afficheMain()
         {
@@ -76,12 +75,22 @@ namespace StupideVautour
 
         }     
 
+        public CartePoints playCarte(int val)
+        {
+            CartePoints carteAJouer = new CartePoints(val);
+            if (main.RemoveAll(delegate(CartePoints c)
+            {
+                if (c.getVal() == val) { return true; }
+                else { return false; }
+            }) == 1)
+            { return carteAJouer; }
+            else { Console.WriteLine("ERREUR : TENTATIVE DE SUPPRESSION DE CARTE INEXISTANTE DANS Joueur.playCarte(int val) !"); return null; }
+        }
+
         public void giveCard(CarteVS carte)
         {
             pot.Add(carte);
             points += carte.getVal();
         }
-
-        
     }
 }

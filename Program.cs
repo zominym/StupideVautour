@@ -10,20 +10,32 @@ namespace StupideVautour
     {
         static void Main(string[] args)
         {
+            List<List<CartePoints>> playedCards = new List<List<CartePoints>>();
+            List<CarteVS> turnedCards = new List<CarteVS>();
             Humain player = new Humain();
             int nbJoueurs;
-            Console.WriteLine("Combien de joueurs IA en plus de vous ? ( 1~4 )");
-            while (!int.TryParse(Console.ReadLine(), out nbJoueurs) || nbJoueurs > 4 || nbJoueurs < 1 )
+            do
             {
-                Console.WriteLine("ERREUR : Saisie non conforme.");
-                Console.WriteLine("Combien de joueurs IA en plus de vous ? ( 1~4 )");  /* FAIRE LE "AJOUTER UNE IA (0=débile, 1=random) */
+                Console.WriteLine("Combien de joueurs IA en plus de vous ? (Saisie autorisée : 1~4)");  /* FAIRE LE "AJOUTER UNE IA (0=débile, 1=random) */
             }
+            while (!int.TryParse(Console.ReadLine(), out nbJoueurs) || nbJoueurs > 4 || nbJoueurs < 1);
             Console.WriteLine("Ajout de " + nbJoueurs + " joueurs Ordinateur...");
             nbJoueurs++;
             List<IA> IAs = new List<IA>();
             for (int i = 1; i < nbJoueurs; i++)
             {
                 IAs.Add(new IA(i));
+            }
+            Console.WriteLine("Détermination de la difficulté des joueurs...");
+            foreach (IA ia in IAs)
+            {
+                int diff;
+                do
+                {
+                    Console.WriteLine("Quelle difficulté pour le joueur " + ia.getName() + " ? (Saisie autorisée : 0~1)");
+                }
+                while (!int.TryParse(Console.ReadLine(), out diff) || diff > 1 || diff < 0);
+                ia.setDifficulty(diff);
             }
             Console.WriteLine("Création et mélange d'un jeu de cartes...");
             Talon talon = new Talon();
@@ -51,11 +63,19 @@ namespace StupideVautour
                 
                 /* CHAQUE JOUEUR JOUE UNE CARTE */
                 CartePoints[] cartes = new CartePoints[nbJoueurs];
-                cartes[0] = player.play();
                 foreach (IA ia in IAs)
                 {
-                    cartes[ia.getID()] = ia.play();
+                    cartes[ia.getID()] = ia.play(carte, playedCards, turnedCards);
                 }
+                cartes[0] = player.play();
+
+
+                /* ON ENREGISTRE CHAQUE CARTE JOUEE PAR CHAQUE JOUEUR ET LA CARTE VS*/
+                for (int i = 0; i < nbJoueurs; i++)
+                {
+                    playedCards.ElementAt(i).Add(cartes[i]);
+                }
+                turnedCards.Add(carte);
 
 
                 /* AFFICHAGE DES CARTES JOUEES */
@@ -206,12 +226,12 @@ namespace StupideVautour
                 }
                 if (maxIA > playerScore)
                 {
-                    Console.WriteLine("N° " + i + ": " + stock.getName() + " avec " + stock.getPoints() + " points.");
+                    Console.WriteLine("N° " + (i+1) + ": " + stock.getName() + " avec " + stock.getPoints() + " points.");
                     IAs.Remove(stock);
                 }
                 else
                 {
-                    Console.WriteLine("N° " + i + ": " + player.getName() + " avec " + player.getPoints() + " points.");
+                    Console.WriteLine("N° " + (i+1) + ": " + player.getName() + " avec " + player.getPoints() + " points.");
                     playerScore = -20;
                 }
             }

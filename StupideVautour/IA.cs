@@ -9,7 +9,7 @@ namespace StupideVautour
     class IA : Joueur
     {
 
-        int lvDif;
+        int diff;
         CarteVS carteTalon = null;
 
         public IA()
@@ -29,38 +29,69 @@ namespace StupideVautour
                 case 4: name = "BOT_Dean"; break;
                 default: name = "BOT_ERROR"; break;
             }
-            this.lvDif = 0;
+            this.diff = 0;
             Console.WriteLine("Joueur " + name + " a rejoint la partie.");
         }
 
         public void setDifficulty(int i)
         {
-            this.lvDif = i;
+            this.diff = i;
         }
-        public override CartePoints play()
+
+        public CartePoints play(CarteVS carteTournee, List<List<CartePoints>> playedCards, List<CarteVS> turnedCards)
         {
-            switch (lvDif)
+            switch (diff)
             {
                 case 0:
-                    return new CartePoints(10);
+                    return playRandom();
                 case 1:
-                    return PlayFacile();
+                    return playInOrder(carteTournee.getVal());
+                case 2:
+                    return playMemory(carteTournee, playedCards, turnedCards);
                 default:
                     return null;
             }
            
         }
 
-        private CartePoints PlayFacile()
+        private CartePoints playRandom()
         {
             CartePoints temp = new CartePoints(0);
             Random i = new Random();
-            int val = (int)i.Next(main.Count());
-            temp = main.ElementAt(val);
-            main.RemoveAt(val);
+            int pos = (int)i.Next(main.Count());
+            temp = main.ElementAt(pos);
+            main.RemoveAt(pos);
             return temp;
         }
-    }
 
-    
+        /* IA PlayInOrder : Chaque carte Vautour/Souris a une importance,
+         * il joue la carte à points qui a la même importance
+         * (souris 10 et carte 15 ont la même importance (maximale)
+         * Cependant l'ordre change car il vaut mieux éviter
+         * une carte vautour -5 que ramasser une carte souris 4
+         */
+        private CartePoints playInOrder(int valCarte)
+        {
+            int[] tValCarte = { 10, 9, 8, 7, 6, 5, -5, 4, -4, 3, -3, 2, -2, 1, -1 };
+            for (int i = 0; i < 15; i++)
+            {
+                if (tValCarte[i] == valCarte) { return playCarte(15 - i); }
+            }
+            return playRandom();
+        }
+
+        /* IA PlayMemory : Se rappelle chaque carte jouee par chaque joueur,
+         * se rappelle aussi chaque carte du talon déjà jouée
+         * en déduit des informations comme :
+         * - a-t-elle la meilleure carte ?
+         * - a-t-elle la pire carte ?
+         * Suit la même règle d'importance que playInOrder ???
+         */
+        private CartePoints playMemory(CarteVS carteTournee, List<List<CartePoints>> playedCards, List<CarteVS> turnedCards)
+        {
+            /* ATTENTION NE PAS OUBLIER LE CAS OU L'HISTORIQUE EST VIDE ! */
+            return new CartePoints(10);
+        }
+
+    }
 }
