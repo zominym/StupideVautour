@@ -154,22 +154,26 @@ namespace StupideVautour
              * (sinon je peux établir un order sur les cartes restantes inférieures à mes "meilleures cartes que le joueur")
              */
 
+            if (playedCards.ElementAt(0).count() == 0)
+            {
+                return playInOrder(carteTournee.getVal());
+            }
             int playOrder = Order(carteTournee.getVal());
             switch(carteTournee.isSouris())
             {
                 case true:
                     List<CartePoints> bestCards = bestCardPlayers(playedCards);
-                    CartePoints bestCard = new CartePoints(-100);
+                    CartePoints bestBestCard = new CartePoints(-100);
                     foreach(CartePoints card in bestCards)
                     {
-                        if (card.getVal()>bestCard.getVal())
+                        if (card.getVal()>bestBestCard.getVal())
                         {
-                            bestCard = card; 
+                            bestBestCard = card; 
                         }
                     }
-                    if(playOrder>bestCard.getVal())
+                    if(playOrder>bestBestCard.getVal())
                     {
-                        for(int i = (bestCard.getVal()+1); i<=(playOrder);i++)
+                        for(int i = (bestBestCard.getVal()+1); i<=(playOrder);i++)
                         {
                             if(this.estDansMain(i))
                             {
@@ -187,13 +191,54 @@ namespace StupideVautour
                         }
                         else 
                         {
-                            return playMoitieInf();
+                            return main.cartes.ElementAt(0);
                         }
 
+                    }
+                    else
+                    {
+                        return main.cartes.ElementAt(0); ;
                     }
                     break;
 
                 case false:
+                    List<CartePoints> worstCards = worstCardPlayers(playedCards);
+                    CartePoints worstBestCard = new CartePoints(1000);
+                    foreach (CartePoints card in worstCards)
+                    {
+                        if(card.getVal()<worstBestCard.getVal())
+                        {
+                            worstBestCard = card;
+                        }
+                    }
+                    if(playOrder>worstBestCard.getVal())
+                    {
+                        for(int i = (worstBestCard.getVal()+1); i<=(playOrder);i++)
+                        {
+                            if(this.estDansMain(i))
+                            {
+                                return this.playCarte(i);
+                            }
+                        }
+                    }
+                    if(carteTournee.getVal()>=5)
+                    {
+                        Random i = new Random();
+                        int val = (int)i.Next(2);
+                        if (val == 1)
+                        {
+                            return playCarte(playOrder);
+                        }
+                        else 
+                        {
+                            return main.cartes.ElementAt(0);
+                        }
+
+                    }
+                    else
+                    {
+                        return main.cartes.ElementAt(0);
+                    }
                     break;
 
                 default:
@@ -203,8 +248,5 @@ namespace StupideVautour
             /* ATTENTION NE PAS OUBLIER LE CAS OU L'HISTORIQUE EST VIDE ! */
             return new CartePoints(10);
         }
-
-        
-
     }
 }
