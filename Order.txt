@@ -1,0 +1,9 @@
+private int Order(CarteVS c, List<CarteVS> h)
+        {
+            int[] tValCarte = { 10, 9, 8, 7, 6, 5, -5, 4, -4, 3, -3, 2, -2, 1, -1 };
+            for (int i = 0; i < 15; i++)
+            {
+                if (tValCarte[i] == c.getVal()) { return (15-i); }
+            }
+            return -1;
+        }
