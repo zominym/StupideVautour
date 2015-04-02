@@ -11,7 +11,7 @@ namespace StupideVautour
     abstract class Joueur 
     {
         protected List<CarteVS> pot = new List<CarteVS>();
-        protected Main main = new Main();
+        protected Main main = new Main(15);
         protected int ID;
         protected string name;
         protected int points;

@@ -7,11 +7,13 @@ namespace StupideVautour
 {
     class Main
     {
-        public List<CartePoints> cartes;
+        public List<CartePoints> cartes = new List<CartePoints>();
 
-        public Main()
+        public Main() { }
+
+        public Main(int n)
         {
-            for (int i = 1; i <= 15; i++)
+            for (int i = 1; i <= n; i++)
             {
                 add(new CartePoints(i));
             }
@@ -43,6 +45,18 @@ namespace StupideVautour
         public void removeAt(int i)
         {
             cartes.RemoveAt(i);
+        }
+
+        public bool contient(CartePoints rem)
+        {
+            foreach (CartePoints c in cartes)
+            {
+                if (c.getVal() == rem.getVal())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace StupideVautour
     {
         static void Main(string[] args)
         {
-            List<List<CartePoints>> playedCards = new List<List<CartePoints>>();
+            List<Main> playedCards = new List<Main>();
             List<CarteVS> turnedCards = new List<CarteVS>();
             Humain player = new Humain();
             int nbJoueurs;
@@ -42,7 +42,7 @@ namespace StupideVautour
 
             for (int i = 0; i < nbJoueurs; i++)
             {
-                playedCards.Add(new List<CartePoints>());
+                playedCards.Add(new Main());
             }
 
 
@@ -80,7 +80,7 @@ namespace StupideVautour
                 /* ON ENREGISTRE CHAQUE CARTE JOUEE PAR CHAQUE JOUEUR ET LA CARTE VS*/
                 for (int i = 0; i < nbJoueurs; i++)
                 {
-                    playedCards.ElementAt(i).Add(cartes[i]);
+                    playedCards.ElementAt(i).add(cartes[i]);
                 }
                 turnedCards.Add(carte);
 

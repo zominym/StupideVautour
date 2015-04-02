@@ -38,7 +38,7 @@ namespace StupideVautour
             this.diff = i;
         }
 
-        public CartePoints play(CarteVS carteTournee, List<List<CartePoints>> playedCards, List<CarteVS> turnedCards)
+        public CartePoints play(CarteVS carteTournee, List<Main> playedCards, List<CarteVS> turnedCards)
         {
             switch (diff)
             {
@@ -90,18 +90,18 @@ namespace StupideVautour
         private CartePoints playMoitieInf()
         {
             Random i = new Random();
-            int val = (int)i.Next((main.Count / 2));
+            int val = (int)i.Next((main.count() / 2));
             return playCarte(val);
         }
 
-        private  List<CartePoints> bestCardPlayers(List<List<CartePoints>> playedCards)
+        private  List<CartePoints> bestCardPlayers(List<Main> playedCards)
         {
             List<CartePoints> bestCardPlayers = new List<CartePoints>();
-            foreach(List<CartePoints> mainPLayer in playedCards)
+            foreach(Main mainPlayer in playedCards)
             {               
                 for(int i = 15;i >0;i--)
                 {
-                    if(mainPLayer.estDansMain(i))
+                    if(mainPlayer.contient(new CartePoints(i)))
                     {
                         bestCardPlayers.Add(new CartePoints(i));
                         break;
@@ -111,16 +111,16 @@ namespace StupideVautour
             return bestCardPlayers;
         }
 
-        private List<CartePoints> worstCardPlayers(List<List<CartePoints>> playedCards)
+        private List<CartePoints> worstCardPlayers(List<Main> playedCards)
         {
             List<CartePoints> worstCardPlayers = new List<CartePoints>();
-            foreach (List<CartePoints> mainPLayer in playedCards)
+            foreach (Main mainPlayer in playedCards)
             {
                 CartePoints testCarte = new CartePoints(0);
                 for (int i = 1; i < 16; i++)
                 {
                     testCarte.setVal(i);
-                    if (mainPLayer.Contains(testCarte))
+                    if (mainPlayer.contient(testCarte))
                     {
                         worstCardPlayers.Add(testCarte);
                         break;
@@ -138,7 +138,7 @@ namespace StupideVautour
         * - a-t-elle la pire carte ?
         * Suit la même règle d'importance que playInOrder ???
         */
-        private CartePoints playMemory(CarteVS carteTournee, List<List<CartePoints>> playedCards, List<CarteVS> turnedCards)
+        private CartePoints playMemory(CarteVS carteTournee, List<Main> playedCards, List<CarteVS> turnedCards)
         {
             int playOrder = Order(carteTournee.getVal());
             switch(carteTournee.isSouris())
