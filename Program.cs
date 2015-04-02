@@ -34,7 +34,7 @@ namespace StupideVautour
                 {
                     Console.WriteLine("Quelle difficulté pour le joueur " + ia.getName() + " ? (Saisie autorisée : 0~1)");
                 }
-                while (!int.TryParse(Console.ReadLine(), out diff) || diff > 1 || diff < 0);
+                while (!int.TryParse(Console.ReadLine(), out diff) || diff > 2 || diff < 0);
                 ia.setDifficulty(diff);
             }
             Console.WriteLine("Création et mélange d'un jeu de cartes...");
