@@ -58,9 +58,9 @@ namespace StupideVautour
         {
             CartePoints temp = new CartePoints(0);
             Random i = new Random();
-            int pos = (int)i.Next(main.Count());
-            temp = main.ElementAt(pos);
-            main.RemoveAt(pos);
+            int pos = (int)i.Next(main.count());
+            temp = main.cartes.ElementAt(pos);
+            main.cartes.RemoveAt(pos);
             return temp;
         }
 

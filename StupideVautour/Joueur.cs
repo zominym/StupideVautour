@@ -11,21 +11,16 @@ namespace StupideVautour
     abstract class Joueur 
     {
         protected List<CarteVS> pot = new List<CarteVS>();
-        protected List<CartePoints> main = new List<CartePoints>();
+        protected Main main = new Main();
         protected int ID;
         protected string name;
         protected int points;
-        protected List<CartePoints> carteJouees = new List<CartePoints>();
 
 
         public Joueur(int id)
         {
             points = 0;
             ID = id;
-            for (int i = 1; i <=15 ; i++)
-            {
-                main.Add(new CartePoints(i));
-            }
         }
  
         public string getName()
@@ -43,11 +38,6 @@ namespace StupideVautour
             this.points = i;
         }
 
-        public List<CartePoints> getCarteJouees()
-        {
-            return this.carteJouees;
-        }
-
         public int getID()
         {
             return this.ID;
@@ -55,16 +45,16 @@ namespace StupideVautour
         
         public void afficheMain()
         {
-            Console.WriteLine("Il reste " + main.Count() + " carte(s) dans votre main :");
-            for (int i = 0; i < main.Count();i++)
+            Console.WriteLine("Il reste " + main.count() + " carte(s) dans votre main :");
+            for (int i = 0; i < main.count();i++)
             {
-                Console.Write(main.ElementAt(i).getVal() + "   ");
+                Console.Write(main.cartes.ElementAt(i).getVal() + "   ");
             }
             Console.WriteLine();
         }
         public bool estDansMain(int val)
         {
-            foreach (CartePoints carte in main)
+            foreach (CartePoints carte in main.cartes)
             {
                 if (carte.getVal() == val)
                 {
@@ -78,7 +68,7 @@ namespace StupideVautour
         public CartePoints playCarte(int val)
         {
             CartePoints carteAJouer = new CartePoints(val);
-            if (main.RemoveAll(delegate(CartePoints c)
+            if (main.cartes.RemoveAll(delegate(CartePoints c)
             {
                 if (c.getVal() == val) { return true; }
                 else { return false; }
