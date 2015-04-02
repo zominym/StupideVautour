@@ -64,9 +64,32 @@ namespace StupideVautour
             return temp;
         }
 
-        private int Order(CarteVS c, List<CarteVS> h)
+        private int Order(CarteVS carte, List<CarteVS> hist)
         {
-            int[] tValCarte = { 10, 9, 8, 7, 6, 5, -5, 4, -4, 3, -3, 2, -2, 1, -1 };
+            Talon t = new Talon(0);
+            for (int i = 10; i > 5; i--)
+            {
+                t.cartes.Add(new CarteVS(i));
+            }
+            for (int i = 5; i > 0; i--)
+            {
+                t.cartes.Add(new CarteVS(i));
+                t.cartes.Add(new CarteVS(-i));
+            }
+            foreach (CarteVS c in hist)
+            {
+                t.remove(c);
+            }
+
+            /* SUITE ICI PLEASE */
+
+            int pos = 0;
+            foreach(CarteVS c in t.getCartes())
+            {
+                if (c.getVal() > carte.getVal())
+                { break; }
+                else pos++;
+            }
             for (int i = 0; i < 15; i++)
             {
                 if (tValCarte[i] == c.getVal()) { return (15-i); }
@@ -81,11 +104,8 @@ namespace StupideVautour
          */
         private CartePoints playInOrder(int valCarte)
         {
-            return playCarte(Order(valCarte)); 
+            return playCarte(Order(valCarte));
         }
-
-        
-
 
         private CartePoints playMoitieInf()
         {

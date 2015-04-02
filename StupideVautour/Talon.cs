@@ -8,7 +8,8 @@ namespace StupideVautour
 {
     class Talon
     {
-        List<CarteVS> cartes = new List<CarteVS>();
+        public List<CarteVS> cartes = new List<CarteVS>();
+
         public Talon()
         {
             for (int i = -5; i <= -1; i++)
@@ -20,6 +21,9 @@ namespace StupideVautour
                 cartes.Add(new CarteVS(i));
             }
         }
+
+        public Talon(int p){}
+
         public CarteVS tireCarte()
         {
             CarteVS temp = new CarteVS(0);
@@ -28,6 +32,22 @@ namespace StupideVautour
             temp = cartes.ElementAt(val);
             cartes.RemoveAt(val);
             return temp;
+        }
+
+        public List<CarteVS> getCartes()
+        {
+            return cartes;
+        }
+
+        public void remove(CarteVS c)
+        {
+            foreach (CarteVS cc in cartes)
+            {
+                if (cc.getVal() == c.getVal())
+                {
+                    cartes.Remove(cc);
+                }
+            }
         }
     }
 }
