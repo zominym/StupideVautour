@@ -19,5 +19,10 @@ namespace StupideVautour
         {
             return this.val;
         }
+
+        public void setVal(int i)
+        {
+            this.val = i;
+        }
    }
 }
