@@ -64,12 +64,12 @@ namespace StupideVautour
             return temp;
         }
 
-        private int Order(int valCarte)
+        private int Order(CarteVS c, List<CarteVS> h)
         {
             int[] tValCarte = { 10, 9, 8, 7, 6, 5, -5, 4, -4, 3, -3, 2, -2, 1, -1 };
             for (int i = 0; i < 15; i++)
             {
-                if (tValCarte[i] == valCarte) { return (15-i); }
+                if (tValCarte[i] == c.getVal()) { return (15-i); }
             }
             return -1;
         }
@@ -140,6 +140,20 @@ namespace StupideVautour
         */
         private CartePoints playMemory(CarteVS carteTournee, List<Main> playedCards, List<CarteVS> turnedCards)
         {
+            /*
+             * SOURIS
+             * Si je peux gagner car j'ai n>0 meilleures carte de toutes
+             * Alors je regarde si cela vaut le coup
+             * (exemple : si j'ai les n meilleures cartes du jeu, j'en joue une si la carte souris est une des n meilleures restantes)
+             * Si je suis sur de perdre je joue ma pire
+             * 
+             * VAUTOUR
+             * Si j'ai n>0 cartes meilleures que la meilleure carte d'un joueur
+             * alors je regarde si cela vaut le coup
+             * (exemple : si c'est un des n plus grand vautours, je joue une de mes cartes meilleures que le joueur [la plus petite] )
+             * (sinon je peux établir un order sur les cartes restantes inférieures à mes "meilleures cartes que le joueur")
+             */
+
             int playOrder = Order(carteTournee.getVal());
             switch(carteTournee.isSouris())
             {
