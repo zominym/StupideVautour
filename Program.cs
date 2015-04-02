@@ -40,22 +40,29 @@ namespace StupideVautour
             Console.WriteLine("Création et mélange d'un jeu de cartes...");
             Talon talon = new Talon();
 
+            for (int i = 0; i < nbJoueurs; i++)
+            {
+                playedCards.Add(new List<CartePoints>());
+            }
+
 
             Console.WriteLine();
             Console.WriteLine("----- Début du jeu ! -----");
             Console.WriteLine();
 
-            CarteVS carte;
-            
+            CarteVS carte = new CarteVS(0);
 
+            bool rejouer = false;
             /* BOUCLE DE JEU (15 TOURS) */
             for (int tour = 1; tour <= 15; tour++)
             {
+                
                 Console.WriteLine();
                 Console.WriteLine("----- Tour " + tour + " ! -----");
 
                 /* TIRAGE ET AFFICHAGE DE LA CARTE DU TALON */
-                carte = talon.tireCarte();
+                if (!rejouer) { carte = talon.tireCarte(); }
+                if (rejouer) { rejouer = false; }
                 if (carte.isSouris()) { Console.Write("Carte SOURIS retournée ! Sa valeur est : "); }
                 else { Console.Write("Carte VAUTOUR retournée ! Sa valeur est : "); }
                 Console.WriteLine(carte.getVal() + ".");
@@ -138,7 +145,7 @@ namespace StupideVautour
                             }
                         }
                     }
-                    if (max == 0) {/* REJOUER */}
+                    if (max == 0) { rejouer = true; }
                     else
                     {
                         if (ID == 0) { player.giveCard(carte); Console.WriteLine("La carte va à " + player.getName() + "."); }
@@ -160,7 +167,7 @@ namespace StupideVautour
                             }
                         }
                     }
-                    if (min == 20) { /* REJOUER */}
+                    if (min == 20) { rejouer = true;  }
                     else
                     {
                         if (ID == 0) { player.giveCard(carte); Console.WriteLine("La carte va à " + player.getName() + "."); }
