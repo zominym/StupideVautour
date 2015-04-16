@@ -72,9 +72,14 @@ namespace StupideVautour
                 CartePoints[] cartes = new CartePoints[nbJoueurs];
                 foreach (IA ia in IAs)
                 {
+                    Console.WriteLine("Main du bot :");
+                    ia.afficheMain();
                     cartes[ia.getID()] = ia.play(carte, playedCards, turnedCards);
+                    
                 }
+                Console.WriteLine("Notre main");
                 cartes[0] = player.play();
+                
 
 
                 /* ON ENREGISTRE CHAQUE CARTE JOUEE PAR CHAQUE JOUEUR ET LA CARTE VS*/
