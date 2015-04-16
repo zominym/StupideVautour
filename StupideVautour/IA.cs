@@ -85,16 +85,17 @@ namespace StupideVautour
             int pos = 0;
             foreach(CarteVS c in t.getCartes())
             {
-                if (c.getVal() == carte.getVal())
+                if (Math.Abs(c.getVal()) < Math.Abs(carte.getVal()))
                 {
-                    return (main.cartes.ElementAt(pos).getVal());
-                }
-                else
-                {
-                    return -1;
+                    pos++;   
                 }
             }
-        }
+            if(pos >= main.count())
+            {
+                pos = main.count() - 1;
+            }
+            return (main.cartes.ElementAt(pos).getVal());
+            }
 
 
         /* IA PlayInOrder : Chaque carte Vautour/Souris a une importance,

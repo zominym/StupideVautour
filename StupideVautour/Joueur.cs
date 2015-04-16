@@ -68,11 +68,7 @@ namespace StupideVautour
         public CartePoints playCarte(int val)
         {
             CartePoints carteAJouer = new CartePoints(val);
-            if (main.cartes.RemoveAll(delegate(CartePoints c)
-            {
-                if (c.getVal() == val) { return true; }
-                else { return false; }
-            }) == 1)
+            if (main.remove(carteAJouer) == carteAJouer.getVal())
             { return carteAJouer; }
             else { Console.WriteLine("ERREUR : TENTATIVE DE SUPPRESSION DE CARTE INEXISTANTE DANS Joueur.playCarte(int val) !"); return null; }
         }
