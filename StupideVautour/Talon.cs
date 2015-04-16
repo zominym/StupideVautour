@@ -41,13 +41,16 @@ namespace StupideVautour
 
         public void remove(CarteVS c)
         {
+            CarteVS toRemove = null;
             foreach (CarteVS cc in cartes)
             {
                 if (cc.getVal() == c.getVal())
                 {
-                    cartes.Remove(cc);
+                    toRemove = cc;
+                    break;
                 }
             }
+            cartes.Remove(toRemove);
         }
     }
 }
