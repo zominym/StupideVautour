@@ -82,16 +82,18 @@ namespace StupideVautour
                 t.remove(c);
             }
 
-            /* SUITE ICI PLEASE */
-
             int pos = 0;
             foreach(CarteVS c in t.getCartes())
             {
-                if (c.getVal() > carte.getVal())
-                { break; }
-                else pos++;
+                if (c.getVal() == carte.getVal())
+                {
+                    return (main.cartes.ElementAt(pos).getVal());
+                }
+                else
+                {
+                    return -1;
+                }
             }
-                return (main.cartes.ElementAt(pos).getVal());
         }
 
 
@@ -172,7 +174,6 @@ namespace StupideVautour
              * (exemple : si c'est un des n plus grand vautours, je joue une de mes cartes meilleures que le joueur [la plus petite] )
              * (sinon je peux établir un order sur les cartes restantes inférieures à mes "meilleures cartes que le joueur")
              */
-
             if (playedCards.ElementAt(0).count() == 0)
             {
                 return playInOrder(carteTournee,turnedCards);
