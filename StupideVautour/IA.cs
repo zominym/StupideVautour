@@ -82,17 +82,39 @@ namespace StupideVautour
                 t.remove(c);
             }
 
-            int pos = 0;
+            int pos1 = main.count() - 1;
+            int pos2 = main.count() - 1;
             foreach(CarteVS c in t.getCartes())
             {
-                if (Math.Abs(c.getVal()) < Math.Abs(carte.getVal()))
+                if (Math.Abs(c.getVal()) > Math.Abs(carte.getVal()))
                 {
-                    pos++;   
+                    pos1--;
+                    Console.WriteLine("DEBUG : PlayInOrder : pos1-- car " + c.getVal() + " < " + carte.getVal());
+                }
+                if (Math.Abs(c.getVal()) >= Math.Abs(carte.getVal()))
+                {
+                    pos2--;
+                    Console.WriteLine("DEBUG : PlayInOrder : pos2-- car " + c.getVal() + " < " + carte.getVal());
                 }
             }
-            if(pos >= main.count())
+            int pos = pos1;
+            pos2++;
+            if (carte.getVal() <= 5)
             {
-                pos = main.count() - 1;
+                Random rand = new Random();
+                pos = rand.Next(0, 1);
+                if (pos == 1)
+                {
+                    pos = pos1;
+                }
+                else
+                {
+                    pos = pos2;
+                }
+            }
+            if(pos < 0)
+            {
+                pos = 0;
             }
             return (main.cartes.ElementAt(pos).getVal());
             }
