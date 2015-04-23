@@ -45,7 +45,7 @@ namespace StupideVautour
                 case 0:
                     return playRandom();
                 case 1:
-                    return playInOrder(carteTournee.getVal());
+                    return playInOrder(carteTournee, turnedCards);
                 case 2:
                     return playMemory(carteTournee, playedCards, turnedCards);
                 default:
@@ -67,15 +67,16 @@ namespace StupideVautour
         private int Order(CarteVS carte, List<CarteVS> hist)
         {
             Talon t = new Talon(0);
-            for (int i = 10; i > 5; i--)
-            {
-                t.cartes.Add(new CarteVS(i));
-            }
-            for (int i = 5; i > 0; i--)
+            for (int i = 1; i <= 5; i++)
             {
                 t.cartes.Add(new CarteVS(i));
                 t.cartes.Add(new CarteVS(-i));
             }
+            for (int i = 6; i <= 10; i++)
+            {
+                t.cartes.Add(new CarteVS(i));
+            }
+            
             foreach (CarteVS c in hist)
             {
                 t.remove(c);
@@ -90,21 +91,19 @@ namespace StupideVautour
                 { break; }
                 else pos++;
             }
-            for (int i = 0; i < 15; i++)
-            {
-                if (tValCarte[i] == c.getVal()) { return (15-i); }
-            }
-            return -1;
+                return (main.cartes.ElementAt(pos).getVal());
         }
+
+
         /* IA PlayInOrder : Chaque carte Vautour/Souris a une importance,
          * il joue la carte à points qui a la même importance
          * (souris 10 et carte 15 ont la même importance (maximale)
          * Cependant l'ordre change car il vaut mieux éviter
          * une carte vautour -5 que ramasser une carte souris 4
          */
-        private CartePoints playInOrder(int valCarte)
+        private CartePoints playInOrder(CarteVS c, List<CarteVS> hist)
         {
-            return playCarte(Order(valCarte));
+            return playCarte(Order(c,hist));
         }
 
         private CartePoints playMoitieInf()
@@ -176,9 +175,9 @@ namespace StupideVautour
 
             if (playedCards.ElementAt(0).count() == 0)
             {
-                return playInOrder(carteTournee.getVal());
+                return playInOrder(carteTournee,turnedCards);
             }
-            int playOrder = Order(carteTournee.getVal());
+            int playOrder = Order(carteTournee,turnedCards);
             switch(carteTournee.isSouris())
             {
                 case true:
