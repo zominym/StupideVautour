@@ -13,13 +13,25 @@ namespace StupideVautour
             List<Main> playedCards = new List<Main>();
             List<CarteVS> turnedCards = new List<CarteVS>();
             Humain player = new Humain();
+            
             int nbJoueurs;
             do
             {
-                Console.WriteLine("Combien de joueurs IA en plus de vous ? (Saisie autorisée : 1~4)");  /* FAIRE LE "AJOUTER UNE IA (0=débile, 1=random) */
+                Console.Clear();
+                Console.WriteLine("                           ___________ ");
+                Console.WriteLine("                     Nom > Nombre d'IA > Difficulté > Jeu \n");
+                Console.WriteLine("Combien de joueurs IA en plus de vous ? (Saisie autorisée : 1~4)\n");  /* FAIRE LE "AJOUTER UNE IA (0=débile, 1=random)" */
             }
             while (!int.TryParse(Console.ReadLine(), out nbJoueurs) || nbJoueurs > 4 || nbJoueurs < 1);
-            Console.WriteLine("Ajout de " + nbJoueurs + " joueurs Ordinateur...");
+
+
+            Console.Write("\nAjout de " + nbJoueurs + " joueurs Ordinateur.");
+            System.Threading.Thread.Sleep(1000);
+            Console.Write(".");
+            System.Threading.Thread.Sleep(1000);
+            Console.Write(".");
+            System.Threading.Thread.Sleep(1000);
+
             nbJoueurs++;
             List<IA> IAs = new List<IA>();
             for (int i = 1; i < nbJoueurs; i++)
@@ -82,12 +94,11 @@ namespace StupideVautour
                 
 
 
-                /* ON ENREGISTRE CHAQUE CARTE JOUEE PAR CHAQUE JOUEUR ET LA CARTE VS*/
+                /* ON ENREGISTRE CHAQUE CARTE JOUEE PAR CHAQUE JOUEUR */
                 for (int i = 0; i < nbJoueurs; i++)
                 {
                     playedCards.ElementAt(i).add(cartes[i]);
                 }
-                turnedCards.Add(carte);
 
 
                 /* AFFICHAGE DES CARTES JOUEES */
@@ -155,6 +166,7 @@ namespace StupideVautour
                     {
                         if (ID == 0) { player.giveCard(carte); Console.WriteLine("La carte va à " + player.getName() + "."); }
                         else { ID--; IAs.ElementAt(ID).giveCard(carte); Console.WriteLine("La carte va à " + IAs.ElementAt(ID).getName() + "."); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
+                        turnedCards.Add(carte); // Si non-égalité, on ajoute la carte à l'historique des cartes prises
                     }
                 }
                 else
@@ -177,6 +189,7 @@ namespace StupideVautour
                     {
                         if (ID == 0) { player.giveCard(carte); Console.WriteLine("La carte va à " + player.getName() + "."); }
                         else { ID--; IAs.ElementAt(ID).giveCard(carte); Console.WriteLine("La carte va à " + IAs.ElementAt(ID).getName() + "."); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
+                        turnedCards.Add(carte); // Si non-égalité, on ajoute la carte à l'historique des cartes prises(
                     }
                 }
             }
@@ -255,5 +268,14 @@ namespace StupideVautour
             Console.ReadLine();
 
         }
+
+        
+
+    static void print(String s)
+    {
+        for (int i = 0; i < s.Length(); i++)
+        Console.writ
+    }
+
     }
 }

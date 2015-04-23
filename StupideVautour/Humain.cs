@@ -15,7 +15,10 @@ namespace StupideVautour
             String a;
             do
             {
-                Console.WriteLine("Quel est votre nom ? (Saisie autorisée : 3~20 chars, le préfixe 'BOT' est réservé aux ordinateurs)");
+                Console.Clear();
+                Console.WriteLine("                     ___ ");
+                Console.WriteLine("                     Nom > Nombre d'IA > Difficulté > Jeu \n");
+                Console.WriteLine("Quel est votre nom ? (Saisie autorisée : 3~20 chars)\n[ Le préfixe 'BOT' est réservé aux ordinateurs ]\n");
                 a = Console.ReadLine();
             }
             while (a.Length < 3 || (a[0] == 'B' && a[1] == 'O' && a[2] == 'T'));

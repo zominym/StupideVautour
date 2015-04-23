@@ -89,28 +89,26 @@ namespace StupideVautour
                 if (Math.Abs(c.getVal()) > Math.Abs(carte.getVal()))
                 {
                     pos1--;
-                    Console.WriteLine("DEBUG : PlayInOrder : pos1-- car " + c.getVal() + " < " + carte.getVal());
+                    //Console.WriteLine("DEBUG : PlayInOrder : pos1-- car " + c.getVal() + " > " + carte.getVal());
                 }
                 if (Math.Abs(c.getVal()) >= Math.Abs(carte.getVal()))
                 {
                     pos2--;
-                    Console.WriteLine("DEBUG : PlayInOrder : pos2-- car " + c.getVal() + " < " + carte.getVal());
+                    //Console.WriteLine("DEBUG : PlayInOrder : pos2-- car " + c.getVal() + " >= " + carte.getVal());
                 }
             }
             int pos = pos1;
             pos2++;
-            if (carte.getVal() <= 5)
+            //Console.WriteLine("DEBUG : Alea entre " + pos1 + " et " + pos2);
+            Random rand = new Random();
+            pos = rand.Next(0, 1);
+            if (pos == 1)
             {
-                Random rand = new Random();
-                pos = rand.Next(0, 1);
-                if (pos == 1)
-                {
-                    pos = pos1;
-                }
-                else
-                {
-                    pos = pos2;
-                }
+                pos = pos1;
+            }
+            else
+            {
+                pos = pos2;
             }
             if(pos < 0)
             {
