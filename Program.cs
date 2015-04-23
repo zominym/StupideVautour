@@ -8,29 +8,43 @@ namespace StupideVautour
 {
     class Program
     {
+        static public String playerName = "";
+        static int tour = 0;
+        static bool isSouris = true;
+        static int val = 0;
+
         static void Main(string[] args)
         {
+            afficheMenu();
+            Console.ReadLine();
+
+            Console.Clear();
+            print("\n                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
+            System.Threading.Thread.Sleep(500);
+
             List<Main> playedCards = new List<Main>();
             List<CarteVS> turnedCards = new List<CarteVS>();
             Humain player = new Humain();
             
             int nbJoueurs;
+            
             do
             {
                 Console.Clear();
-                Console.WriteLine("                           ___________ ");
-                Console.WriteLine("                     Nom > Nombre d'IA > Difficulté > Jeu \n");
-                Console.WriteLine("Combien de joueurs IA en plus de vous ? (Saisie autorisée : 1~4)\n");  /* FAIRE LE "AJOUTER UNE IA (0=débile, 1=random)" */
+                Console.Write("                           ___________\n");
+                Console.Write("                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
+                print("Combien de joueurs IA en plus de vous ? (Saisie autorisée : 1~4)\n\n");  /* FAIRE LE "AJOUTER UNE IA (0=débile, 1=random)" */
             }
             while (!int.TryParse(Console.ReadLine(), out nbJoueurs) || nbJoueurs > 4 || nbJoueurs < 1);
 
 
-            Console.Write("\nAjout de " + nbJoueurs + " joueurs Ordinateur.");
-            System.Threading.Thread.Sleep(1000);
-            Console.Write(".");
-            System.Threading.Thread.Sleep(1000);
-            Console.Write(".");
-            System.Threading.Thread.Sleep(1000);
+            print("\nAjout de " + nbJoueurs + " joueurs Ordinateur.");
+            System.Threading.Thread.Sleep(500);
+            print(".");
+            System.Threading.Thread.Sleep(500);
+            print(".\n\n");
+            System.Threading.Thread.Sleep(500);
+
 
             nbJoueurs++;
             List<IA> IAs = new List<IA>();
@@ -38,18 +52,35 @@ namespace StupideVautour
             {
                 IAs.Add(new IA(i));
             }
-            Console.WriteLine("Détermination de la difficulté des joueurs...");
             foreach (IA ia in IAs)
             {
+                Console.Clear();
+                Console.Write("                                         __________\n");
+                Console.Write("                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
+                if (ia.getID() == 0) { print("Détermination de la difficulté des joueurs :\n\n"); }
+                else { Console.Write("Détermination de la difficulté des joueurs :\n\n"); }
                 int diff;
                 do
                 {
-                    Console.WriteLine("Quelle difficulté pour le joueur " + ia.getName() + " ? (Saisie autorisée : 0~1)");
+                    print("Quelle difficulté pour le joueur " + ia.getName() + " ?\n");
+                    print("Aléatoire          |         Facile\n");
+                    print("    0                           1  \n\n");
                 }
                 while (!int.TryParse(Console.ReadLine(), out diff) || diff > 2 || diff < 0);
                 ia.setDifficulty(diff);
             }
-            Console.WriteLine("Création et mélange d'un jeu de cartes...");
+
+            Console.Clear();
+            Console.Write("                                                      ___\n");
+            Console.Write("                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
+            print("Création et mélange d'un jeu de cartes.");
+            System.Threading.Thread.Sleep(500);
+            print(".");
+            System.Threading.Thread.Sleep(500);
+            print(".\n\n");
+            System.Threading.Thread.Sleep(500);
+
+
             Talon talon = new Talon();
 
             for (int i = 0; i < nbJoueurs; i++)
@@ -58,38 +89,39 @@ namespace StupideVautour
             }
 
 
-            Console.WriteLine();
-            Console.WriteLine("----- Début du jeu ! -----");
-            Console.WriteLine();
+            print("\n");
+            print("Début du jeu !");
+            System.Threading.Thread.Sleep(500);
+            print("!");
+            System.Threading.Thread.Sleep(500);
+            print("!");
+            System.Threading.Thread.Sleep(500);
+
+            Console.Clear();
+            print("\n                    Partie de " + playerName + "\n\n");
+            print("\n");
 
             CarteVS carte = new CarteVS(0);
 
             bool rejouer = false;
             /* BOUCLE DE JEU (15 TOURS) */
-            for (int tour = 1; tour <= 15; tour++)
+            for (tour = 1; tour <= 15; tour++)
             {
-                
-                Console.WriteLine();
-                Console.WriteLine("----- Tour " + tour + " ! -----");
 
-                /* TIRAGE ET AFFICHAGE DE LA CARTE DU TALON */
+                /* TIRAGE DE LA CARTE DU TALON */
                 if (!rejouer) { carte = talon.tireCarte(); }
                 if (rejouer) { rejouer = false; }
-                if (carte.isSouris()) { Console.Write("Carte SOURIS retournée ! Sa valeur est : "); }
-                else { Console.Write("Carte VAUTOUR retournée ! Sa valeur est : "); }
-                Console.WriteLine(carte.getVal() + ".");
+                isSouris = carte.isSouris();
+                val = carte.getVal();
+
 
                 
                 /* CHAQUE JOUEUR JOUE UNE CARTE */
                 CartePoints[] cartes = new CartePoints[nbJoueurs];
                 foreach (IA ia in IAs)
                 {
-                    Console.WriteLine("Main du bot :");
-                    ia.afficheMain();
                     cartes[ia.getID()] = ia.play(carte, playedCards, turnedCards);
-                    
                 }
-                Console.WriteLine("Notre main");
                 cartes[0] = player.play();
                 
 
@@ -102,10 +134,10 @@ namespace StupideVautour
 
 
                 /* AFFICHAGE DES CARTES JOUEES */
-                Console.WriteLine("Le joueurs " + player.getName() + " joue sa carte :" + cartes[0].getVal() + ".");
+                print("\nLe joueurs " + player.getName() + " joue sa carte : " + cartes[0].getVal() + ".\n");
                 foreach (IA ia in IAs)
                 {
-                    Console.WriteLine("Le joueur " + ia.getName() + " joue sa carte :" + cartes[ia.getID()].getVal() + ".");
+                    print("\nLe joueur " + ia.getName() + " joue sa carte : " + cartes[ia.getID()].getVal() + ".\n");
                 }
 
 
@@ -164,8 +196,8 @@ namespace StupideVautour
                     if (max == 0) { rejouer = true; }
                     else
                     {
-                        if (ID == 0) { player.giveCard(carte); Console.WriteLine("La carte va à " + player.getName() + "."); }
-                        else { ID--; IAs.ElementAt(ID).giveCard(carte); Console.WriteLine("La carte va à " + IAs.ElementAt(ID).getName() + "."); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
+                        if (ID == 0) { player.giveCard(carte); print("\nLa carte va à " + player.getName() + ".\n"); }
+                        else { ID--; IAs.ElementAt(ID).giveCard(carte); print("\nLa carte va à " + IAs.ElementAt(ID).getName() + ".\n"); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
                         turnedCards.Add(carte); // Si non-égalité, on ajoute la carte à l'historique des cartes prises
                     }
                 }
@@ -187,11 +219,12 @@ namespace StupideVautour
                     if (min == 20) { rejouer = true;  }
                     else
                     {
-                        if (ID == 0) { player.giveCard(carte); Console.WriteLine("La carte va à " + player.getName() + "."); }
-                        else { ID--; IAs.ElementAt(ID).giveCard(carte); Console.WriteLine("La carte va à " + IAs.ElementAt(ID).getName() + "."); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
+                        if (ID == 0) { player.giveCard(carte); print("\nLa carte va à " + player.getName() + ".\n"); }
+                        else { ID--; IAs.ElementAt(ID).giveCard(carte); print("\nLa carte va à " + IAs.ElementAt(ID).getName() + ".\n"); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
                         turnedCards.Add(carte); // Si non-égalité, on ajoute la carte à l'historique des cartes prises(
                     }
                 }
+                Console.ReadLine();
             }
 
 
@@ -206,10 +239,10 @@ namespace StupideVautour
             })
             */
 
-            Console.WriteLine();
-            Console.WriteLine("----- Fin du jeu ! -----");
-            Console.WriteLine(); 
-            Console.WriteLine("Et voici le classement :");
+            print("\n");
+            print("----- Fin du jeu ! -----\n");
+            print("\n");
+            print("Et voici le classement :\n");
 
 
             /*
@@ -225,12 +258,12 @@ namespace StupideVautour
             {
                 if (player.getPoints() >= IAs.First().getPoints())
                 {
-                    Console.WriteLine("N° " + i + ": " + player.getName() + " avec " + player.getPoints() + " points.");
+                    print("N° " + i + ": " + player.getName() + " avec " + player.getPoints() + " points.");
                     player.setPoints(-20);
                 }
                 else
                 {
-                    Console.WriteLine("N° " + i + ": " + IAs.First().getName() + " avec " + IAs.First().getPoints() + " points.");
+                    print("N° " + i + ": " + IAs.First().getName() + " avec " + IAs.First().getPoints() + " points.");
                     IAs.Remove(IAs.First());
                 }
             }
@@ -251,18 +284,18 @@ namespace StupideVautour
                 }
                 if (maxIA > playerScore)
                 {
-                    Console.WriteLine("N° " + (i+1) + ": " + stock.getName() + " avec " + stock.getPoints() + " points.");
+                    print("N° " + (i+1) + ": " + stock.getName() + " avec " + stock.getPoints() + " points.");
                     IAs.Remove(stock);
                 }
                 else
                 {
-                    Console.WriteLine("N° " + (i+1) + ": " + player.getName() + " avec " + player.getPoints() + " points.");
+                    print("N° " + (i+1) + ": " + player.getName() + " avec " + player.getPoints() + " points.");
                     playerScore = -20;
                 }
             }
             if (playerScore != -20)
             {
-                Console.WriteLine("N° " + nbJoueurs + ": " + player.getName() + " avec " + player.getPoints() + " points.");
+                print("N° " + nbJoueurs + ": " + player.getName() + " avec " + player.getPoints() + " points.");
             }
 
             Console.ReadLine();
@@ -271,11 +304,58 @@ namespace StupideVautour
 
         
 
-    static void print(String s)
-    {
-        for (int i = 0; i < s.Length(); i++)
-        Console.writ
-    }
+        public static void print(String s)
+        {
+            for (int i = 0; i < s.Length; i++)
+            {
+                Console.Write(s[i]);
+                System.Threading.Thread.Sleep(10);
+            }
 
+        }
+
+        public static void printspecial(String s)
+        {
+            for (int i = 0; i < s.Length; i+=1)
+            {
+                Console.Write(s[i]);
+                System.Threading.Thread.Sleep(1);
+            }
+
+        }
+
+        static void afficheMenu()
+        {
+            printspecial("   _____ _               _     _        \n  / ____| |             (_)   | |       \n | (___ | |_ _   _ _ __  _  __| | ___   \n  \\___ \\| __| | | | '_ \\| |/ _` |/ _ \\  \n  ____) | |_| |_| | |_) | | (_| |  __/  \n |_____/ \\__|\\__,_| .__/|_|\\__,_|\\___|  \n                  | |                   \n                  |_|                   \n __      __         _\n \\ \\    / /        | |                  \n  \\ \\  / /_ _ _   _| |_ ___  _   _ _ __ \n   \\ \\/ / _` | | | | __/ _ \\| | | | '__|\n    \\  / (_| | |_| | || (_) | |_| | |   \n     \\/ \\__,_|\\__,_|\\__\\___/ \\__,_|_|   ");
+        }
+
+        public static void printPartie(String s, bool defil)
+        {
+            if (defil)
+            {
+                Console.Clear();
+                Console.WriteLine("");
+                Console.WriteLine("                    Partie de " + playerName + ", Tour : " + tour + "\n\n");
+                if (isSouris) { print("Carte SOURIS retournée ! Sa valeur est : "); }
+                else { print("Carte VAUTOUR retournée ! Sa valeur est : "); }
+                print(val + ".\n\n");
+                for (int i = 0; i < s.Length; i++)
+                {
+                    Console.Write(s[i]);
+                    System.Threading.Thread.Sleep(10);
+                }
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("");
+                Console.WriteLine("                    Partie de " + playerName + ", Tour : " + tour + "\n\n");
+                if (isSouris) { Console.Write("Carte SOURIS retournée ! Sa valeur est : "); }
+                else { Console.Write("Carte VAUTOUR retournée ! Sa valeur est : "); }
+                Console.Write(val + ".\n\n");
+                Console.Write(s);
+            }
+
+        }
     }
 }

@@ -30,7 +30,12 @@ namespace StupideVautour
                 default: name = "BOT_ERROR"; break;
             }
             this.diff = 0;
-            Console.WriteLine("Joueur " + name + " a rejoint la partie.");
+            Program.print("Joueur " + name + " a rejoint la partie.");
+            System.Threading.Thread.Sleep(500);
+            Program.print(".");
+            System.Threading.Thread.Sleep(500);
+            Program.print(".\n");
+            System.Threading.Thread.Sleep(500);
         }
 
         public void setDifficulty(int i)
@@ -89,17 +94,17 @@ namespace StupideVautour
                 if (Math.Abs(c.getVal()) > Math.Abs(carte.getVal()))
                 {
                     pos1--;
-                    //Console.WriteLine("DEBUG : PlayInOrder : pos1-- car " + c.getVal() + " > " + carte.getVal());
+                    //print("DEBUG : PlayInOrder : pos1-- car " + c.getVal() + " > " + carte.getVal());
                 }
                 if (Math.Abs(c.getVal()) >= Math.Abs(carte.getVal()))
                 {
                     pos2--;
-                    //Console.WriteLine("DEBUG : PlayInOrder : pos2-- car " + c.getVal() + " >= " + carte.getVal());
+                    //print("DEBUG : PlayInOrder : pos2-- car " + c.getVal() + " >= " + carte.getVal());
                 }
             }
             int pos = pos1;
             pos2++;
-            //Console.WriteLine("DEBUG : Alea entre " + pos1 + " et " + pos2);
+            //print("DEBUG : Alea entre " + pos1 + " et " + pos2);
             Random rand = new Random();
             pos = rand.Next(0, 1);
             if (pos == 1)
@@ -240,7 +245,7 @@ namespace StupideVautour
                     {
                         return main.cartes.ElementAt(0); ;
                     }
-                    break;
+                    //break;
 
                 case false:
                     List<CartePoints> worstCards = worstCardPlayers(playedCards);
@@ -280,7 +285,7 @@ namespace StupideVautour
                     {
                         return main.cartes.ElementAt(0);
                     }
-                    break;
+                    //break;
 
                 default:
                     break;

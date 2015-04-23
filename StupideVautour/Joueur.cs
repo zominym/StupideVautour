@@ -45,12 +45,12 @@ namespace StupideVautour
         
         public void afficheMain()
         {
-            Console.WriteLine("Il reste " + main.count() + " carte(s) dans votre main :");
+            String temp = "";
             for (int i = 0; i < main.count();i++)
             {
-                Console.Write(main.cartes.ElementAt(i).getVal() + "   ");
+                temp = temp + main.cartes.ElementAt(i).getVal() + "   ";
             }
-            Console.WriteLine();
+            Program.print(temp+"\n");
         }
         public bool estDansMain(int val)
         {
@@ -70,7 +70,7 @@ namespace StupideVautour
             CartePoints carteAJouer = new CartePoints(val);
             if (main.remove(carteAJouer) == carteAJouer.getVal())
             { return carteAJouer; }
-            else { Console.WriteLine("ERREUR : TENTATIVE DE SUPPRESSION DE CARTE INEXISTANTE DANS Joueur.playCarte(int val) !"); return null; }
+            else { Program.print("ERREUR : TENTATIVE DE SUPPRESSION DE CARTE INEXISTANTE DANS Joueur.playCarte(int val) !"); return null; }
         }
 
         public void giveCard(CarteVS carte)
