@@ -319,16 +319,17 @@ namespace StupideVautour
                         }
                     }
 
-                    bool iCanWinVultur = myWorstCard.getVal() > worstWorstCardOther.getVal();
-                    bool iCantWinVultur = myBestCard.getVal() < worstWorstCardOther.getVal();
+                    bool iCanAvoidVultur = myWorstCard.getVal() > worstWorstCardOther.getVal();
+                    bool iCantAvoidVultur = myBestCard.getVal() < worstWorstCardOther.getVal();
 
-                    if(iCantWinVultur)
+                    if(iCantAvoidVultur)
                     {
                         return main.cartes.ElementAt(0);
                     }
-                    else if(iCanWinVultur)
+                    else if(iCanAvoidVultur)
                     {
-
+                        List<CartePoints> cardBetterThan = listCardBetterThan(worstBestCardOther);
+                        int nbCardMorePriorityThan = cardVSBetterThan(carteTournee);
                     }
                                       
                     break;
