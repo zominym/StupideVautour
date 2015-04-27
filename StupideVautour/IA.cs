@@ -10,7 +10,7 @@ namespace StupideVautour
     {
 
         int diff;
-        Main myPlayedCards = null;
+        Main myPlayedCards = new Main();
         Talon t = null;
 
         public IA()
