@@ -259,7 +259,7 @@ namespace StupideVautour
             CartePoints worstBestCardOthers = bestCardsOthers.ElementAt(0);
             switch(carteTournee.isSouris())
             {
-
+                    /*
                 case true:
                     
                     
@@ -335,7 +335,6 @@ namespace StupideVautour
 
 
 
-
                     if(playOrder>worstBestCardOther.getVal())
                     {
                         for(int i = (worstBestCard.getVal()+1); i<=(playOrder);i++)
@@ -368,10 +367,12 @@ namespace StupideVautour
 
                 default:
                     break;
+            */
  
             }
             /* ATTENTION NE PAS OUBLIER LE CAS OU L'HISTORIQUE EST VIDE ! */
             return new CartePoints(10);
+            
         }
     }
 }
