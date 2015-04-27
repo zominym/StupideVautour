@@ -330,38 +330,7 @@ namespace StupideVautour
                     {
 
                     }
-
-
-
-
-                    if(playOrder>worstBestCardOther.getVal())
-                    {
-                        for(int i = (worstBestCard.getVal()+1); i<=(playOrder);i++)
-                        {
-                            if(this.estDansMain(i))
-                            {
-                                return this.playCarte(i);
-                            }
-                        }
-                    }
-                    if(carteTournee.getVal()>=5)
-                    {
-                        Random i = new Random();
-                        int val = (int)i.Next(2);
-                        if (val == 1)
-                        {
-                            return playCarte(playOrder);
-                        }
-                        else 
-                        {
-                            return main.cartes.ElementAt(0);
-                        }
-
-                    }
-                    else
-                    {
-                        return main.cartes.ElementAt(0);
-                    }
+                                      
                     break;
 
                 default:
