@@ -227,47 +227,11 @@ namespace StupideVautour
                 Console.ReadLine();
             }
 
-
-
-            /*
-            parts.Sort(delegate(Part x, Part y)
-            {
-                if (x.PartName == null && y.PartName == null) return 0;
-                else if (x.PartName == null) return -1;
-                else if (y.PartName == null) return 1;
-                else return x.PartName.CompareTo(y.PartName);
-            })
-            */
-
             print("\n");
             print("----- Fin du jeu ! -----\n");
             print("\n");
             print("Et voici le classement :\n");
 
-
-            /*
-            IAs.Sort(   delegate(IA x, IA y)
-                        {
-                            if (x.getPoints() == y.getPoints()) return 0;
-                            else if (x.getPoints() > y.getPoints()) return -1;
-                            else return 1;
-                        });
-
-            
-            for (int i = 0; i <nbJoueurs; i++)
-            {
-                if (player.getPoints() >= IAs.First().getPoints())
-                {
-                    print("N° " + i + ": " + player.getName() + " avec " + player.getPoints() + " points.");
-                    player.setPoints(-20);
-                }
-                else
-                {
-                    print("N° " + i + ": " + IAs.First().getName() + " avec " + IAs.First().getPoints() + " points.");
-                    IAs.Remove(IAs.First());
-                }
-            }
-            */
 
             int playerScore = player.getPoints();
             for (int i = 0; i < nbJoueurs; i++)
