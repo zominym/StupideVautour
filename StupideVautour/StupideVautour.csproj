@@ -49,6 +49,7 @@
     <Compile Include="Humain.cs" />
     <Compile Include="IA.cs" />
     <Compile Include="Joueur.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Talon.cs" />
   </ItemGroup>
