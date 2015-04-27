@@ -3,9 +3,13 @@ C:\Users\Marc\Documents\Programmation\Visual Studio 2013\Projects\StupideVautour
 C:\Users\Marc\Documents\Programmation\Visual Studio 2013\Projects\StupideVautour\StupideVautour\bin\Debug\StupideVautour.pdb
 C:\Users\Marc\Documents\Programmation\Visual Studio 2013\Projects\StupideVautour\StupideVautour\obj\Debug\StupideVautour.exe
 C:\Users\Marc\Documents\Programmation\Visual Studio 2013\Projects\StupideVautour\StupideVautour\obj\Debug\StupideVautour.pdb
+<<<<<<< HEAD
+C:\Users\Marc\Documents\Programmation\Visual Studio 2013\Projects\StupideVautour\StupideVautour\obj\Debug\StupideVautour.csprojResolveAssemblyReference.cache
+=======
 C:\Users\Thomas\Documents\Visual Studio 2013\Projects\StupideVautour\StupideVautour\bin\Debug\StupideVautour.exe.config
 C:\Users\Thomas\Documents\Visual Studio 2013\Projects\StupideVautour\StupideVautour\obj\Debug\StupideVautour.exe
 C:\Users\Thomas\Documents\Visual Studio 2013\Projects\StupideVautour\StupideVautour\obj\Debug\StupideVautour.pdb
 C:\Users\Thomas\Documents\Visual Studio 2013\Projects\StupideVautour\StupideVautour\bin\Debug\StupideVautour.exe
 C:\Users\Thomas\Documents\Visual Studio 2013\Projects\StupideVautour\StupideVautour\bin\Debug\StupideVautour.pdb
 C:\Users\Thomas\Documents\Visual Studio 2013\Projects\StupideVautour\StupideVautour\obj\Debug\StupideVautour.csprojResolveAssemblyReference.cache
+>>>>>>> origin/master
