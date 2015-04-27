@@ -259,7 +259,6 @@ namespace StupideVautour
             CartePoints worstBestCardOthers = bestCardsOthers.ElementAt(0);
             switch(carteTournee.isSouris())
             {
-                    /*
                 case true:
                     
                     
@@ -299,7 +298,7 @@ namespace StupideVautour
                             return playInOrder(carteTournee,turnedCards);
                         }
                     }
-                    //break;
+                    break;
 
                 case false:
                     List<CartePoints> worstCardsOther = worstCardPlayers(playedCardsOther);
@@ -363,11 +362,10 @@ namespace StupideVautour
                     {
                         return main.cartes.ElementAt(0);
                     }
-                    //break;
+                    break;
 
                 default:
                     break;
-            */
  
             }
             /* ATTENTION NE PAS OUBLIER LE CAS OU L'HISTORIQUE EST VIDE ! */
