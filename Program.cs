@@ -66,7 +66,7 @@ namespace StupideVautour
                     print("Aléatoire          |         Facile\n");
                     print("    0                           1  \n\n");
                 }
-                while (!int.TryParse(Console.ReadLine(), out diff) || diff > 2 || diff < 0);
+                while (!int.TryParse(Console.ReadLine(), out diff) || diff > 3 || diff < 0);
                 ia.setDifficulty(diff);
             }
 

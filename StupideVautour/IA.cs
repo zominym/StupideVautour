@@ -46,23 +46,20 @@ namespace StupideVautour
 
         public List<Main> otherPlayedCards(List<Main> playedCards)
         {
-            List<Main> allPlayedCards = playedCards;
-            int pos = 0;
-            foreach(Main mainOther in allPlayedCards)
+            List<Main> allPlayedCards = new List<Main>();
+            int i = 0; 
+            foreach(Main m in playedCards)
             {
-                if (mainOther.Equals(myPlayedCards))
-                {
-                    break;
-                }
-                pos++;                
+                allPlayedCards.Add(playedCards.ElementAt(i));
+                i++;
             }
-            allPlayedCards.RemoveAt(pos);
+            allPlayedCards.RemoveAt(ID);
             return allPlayedCards;
         }
 
         public List<CartePoints> listCardBetterThan(CartePoints bestCardPlayers)
         {
-            List<CartePoints> cardBetterThan = null;
+            List<CartePoints> cardBetterThan = new List<CartePoints>();
             foreach(CartePoints card in main.cartes)
             {
                 if(card.getVal()>bestCardPlayers.getVal())
@@ -95,6 +92,7 @@ namespace StupideVautour
                     return playInOrder(carteTournee, turnedCards);
                 case 2:
                     return playMemory(carteTournee, playedCards, turnedCards);
+                      ;
                 default:
                     return null;
             }
@@ -229,6 +227,7 @@ namespace StupideVautour
         * - a-t-elle la pire carte ?
         * Suit la même règle d'importance que playInOrder ???
         */
+      
         private CartePoints playMemory(CarteVS carteTournee, List<Main> playedCards, List<CarteVS> turnedCards)
         {
             /*
@@ -248,7 +247,7 @@ namespace StupideVautour
             
             if (playedCards.ElementAt(0).count() == 0)
             {
-                return playInOrder(carteTournee,turnedCards);
+                return playInOrder(carteTournee, turnedCards);
             }
 
             int playOrder = Order(carteTournee,turnedCards);
@@ -257,41 +256,49 @@ namespace StupideVautour
             CartePoints myWorstCard = main.cartes.ElementAt(0);
             List<CartePoints> bestCardsOthers = bestCardPlayers(playedCardsOther);
             CartePoints worstBestCardOthers = bestCardsOthers.ElementAt(0);
+            CartePoints bestBestCardOthers = bestCardsOthers.ElementAt(0);
+
+            foreach (CartePoints card in bestCardsOthers)
+            {
+                if (card.getVal() > bestBestCardOthers.getVal())
+                {
+                    bestBestCardOthers = card;
+                }
+                else if (card.getVal() < worstBestCardOthers.getVal())
+                {
+                    worstBestCardOthers = card;
+                }
+
+            }
+            List<CartePoints> worstCardsOther = worstCardPlayers(playedCardsOther);
+            CartePoints worstWorstCardOthers = worstCardsOther.ElementAt(0);
+            foreach (CartePoints card in worstCardsOther)
+            {
+                if (card.getVal() < worstWorstCardOthers.getVal())
+                {
+                    worstWorstCardOthers = card;
+                }
+            }
+         
             switch(carteTournee.isSouris())
             {
                 case true:
-                    
-                    
-                    CartePoints bestBestCardOthers = bestCardsOthers.ElementAt(0);
-                    
-                    foreach(CartePoints card in bestCardsOthers)
-                    {
-                        if (card.getVal()>bestBestCardOthers.getVal())
-                        {
-                            bestBestCardOthers = card; 
-                        }
-                        else if (card.getVal()<worstBestCardOthers.getVal())
-                        {
-                            worstBestCardOthers = card;
-                        }
-
-                    }
-                    
-                    bool iCanWinMouse = myBestCard.getVal() > bestBestCardOthers.getVal();
-                    bool iCantWinMouse = myBestCard.getVal() < worstBestCardOthers.getVal();
+                              
+                   
+                    bool iCantWinMouse = myBestCard.getVal() < worstWorstCardOthers.getVal();
                     
                     if(iCantWinMouse)
                     {
-                        return main.cartes.ElementAt(0);
+                        return playCarte(main.cartes.ElementAt(0).getVal());
                     }
-                    else if(iCanWinMouse)
+                    else 
                     {
                         List<CartePoints> cardBetterThan = listCardBetterThan(bestBestCardOthers);
                         int nbCardMoreProritaryThan = cardVSBetterThan(carteTournee);
                         if(cardBetterThan.Count>=nbCardMoreProritaryThan)
                         {
                             myPlayedCards.cartes.Add(cardBetterThan.ElementAt(0));
-                            return cardBetterThan.ElementAt(0);
+                             return playCarte(cardBetterThan.ElementAt(0).getVal());
                         }
                         else
                         {
@@ -301,35 +308,27 @@ namespace StupideVautour
                     break;
 
                 case false:
-                    List<CartePoints> worstCardsOther = worstCardPlayers(playedCardsOther);
-                    CartePoints worstWorstCardOther = worstCardsOther.ElementAt(0);
-                    foreach (CartePoints card in worstCardsOther)
-                    {
-                        if(card.getVal()<worstWorstCardOther.getVal())
-                        {
-                            worstWorstCardOther = card;
-                        }
-                    }
-                    CartePoints worstBestCardOther = bestCardsOthers.ElementAt(0);
-                    foreach(CartePoints card in bestCardsOthers)
-                    {
-                        if(card.getVal()<worstBestCardOther.getVal())
-                        {
-                            worstBestCardOther = card;
-                        }
-                    }
+                   
 
-                    bool iCanAvoidVultur = myWorstCard.getVal() > worstWorstCardOther.getVal();
-                    bool iCantAvoidVultur = myBestCard.getVal() < worstWorstCardOther.getVal();
+                    bool iCantAvoidVultur = myBestCard.getVal() < worstWorstCardOthers.getVal();
 
                     if(iCantAvoidVultur)
                     {
-                        return main.cartes.ElementAt(0);
+                        return playCarte(main.cartes.ElementAt(0).getVal());
                     }
-                    else if(iCanAvoidVultur)
+                    else 
                     {
-                        List<CartePoints> cardBetterThan = listCardBetterThan(worstBestCardOther);
+                        List<CartePoints> cardBetterThan = listCardBetterThan(worstBestCardOthers);
                         int nbCardMorePriorityThan = cardVSBetterThan(carteTournee);
+                        if(cardBetterThan.Count>=nbCardMorePriorityThan)
+                        {
+                            myPlayedCards.cartes.Add(cardBetterThan.ElementAt(0));
+                            return playCarte(cardBetterThan.ElementAt(0).getVal());
+                        }
+                        else
+                        {
+                            return playInOrder(carteTournee, turnedCards);
+                        }                        
                     }
                                       
                     break;
@@ -339,7 +338,7 @@ namespace StupideVautour
  
             }
             /* ATTENTION NE PAS OUBLIER LE CAS OU L'HISTORIQUE EST VIDE ! */
-            return new CartePoints(10);
+            return new CartePoints(-1);
             
         }
     }
