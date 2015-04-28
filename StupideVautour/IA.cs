@@ -156,13 +156,18 @@ namespace StupideVautour
             {
                 pos = pos2;
             }
+            if (main.cartes.Count() > 5) { pos += rand.Next(-1, 1); }
             if(pos < 0)
             {
                 pos = 0;
             }
+            if(pos > main.cartes.Count())
+            {
+                pos = main.cartes.Count() - 1;
+            }
             myPlayedCards.cartes.Add(main.cartes.ElementAt(pos));
             return (main.cartes.ElementAt(pos).getVal());
-            }
+        }
 
 
         /* IA PlayInOrder : Chaque carte Vautour/Souris a une importance,
