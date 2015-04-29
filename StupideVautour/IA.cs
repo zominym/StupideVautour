@@ -202,7 +202,8 @@ namespace StupideVautour
                     }
                 }
             }
-            return bestCardPlayers;
+            List<CartePoints> sortedBestCardPlayers = bestCardPlayers.OrderBy(CartePoints => CartePoints.getVal()).ToList();
+            return sortedBestCardPlayers;
         }
 
         private List<CartePoints> worstCardPlayers(List<Main> playedCards)
@@ -219,7 +220,8 @@ namespace StupideVautour
                     }
                 }
             }
-            return worstCardPlayers;
+            List<CartePoints> sortedWorstCardPlayers = worstCardPlayers.OrderBy(CartePoints => CartePoints.getVal()).ToList();
+            return sortedWorstCardPlayers;
         }
 
 
@@ -259,7 +261,7 @@ namespace StupideVautour
             CartePoints myWorstCard = main.cartes.ElementAt(0);
             List<CartePoints> bestCardsOthers = bestCardPlayers(playedCardsOther);
            
-            CartePoints worstBestCardOthers = bestCardsOthers.ElementAt(0);
+            CartePoints worstBestCardOthers = bestCardsOthers.ElementAt(bestCardsOthers.Count-1);
             CartePoints bestBestCardOthers = bestCardsOthers.ElementAt(0);
 
             foreach (CartePoints card in bestCardsOthers)
