@@ -58,7 +58,7 @@ namespace StupideVautour
             Program.print("\n\nQuelle carte voulez-vous jouer ? (Saisie autorisée : 1~15 si la carte existe)\n");
             afficheMain();
             Console.WriteLine();
-            while (!int.TryParse(Console.ReadLine(), out a) && a > 0 && a <= 15 || !estDansMain(a))
+            while (!int.TryParse(Console.ReadLine(), out a) && a > 0 && a <= 15 || !main.contient(a))
             {
                 Program.printPartie(false);
                 Console.Write("Voici les cartes que vous avez déjà récupérées :\n");
