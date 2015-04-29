@@ -43,6 +43,10 @@ namespace StupideVautour
             return this.ID;
         }
         
+
+        /// <summary>
+        /// Affiche la main d'un joueur
+        /// </summary>
         public void afficheMain()
         {
             String temp = "";
@@ -52,26 +56,26 @@ namespace StupideVautour
             }
             Program.print(temp+"\n");
         }
-        public bool estDansMain(int val)
-        {
-            foreach (CartePoints carte in main.cartes)
-            {
-                if (carte.getVal() == val)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }     
 
+
+        /// <summary>
+        /// Joue une carte depuis la mian d'un joueur en vérifiant si le joueur la posséde
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
         public CartePoints playCarte(int val)
         {
             CartePoints carteAJouer = new CartePoints(val);
             if (main.remove(carteAJouer) == carteAJouer.getVal())
             { return carteAJouer; }
-            else { Program.print("ERREUR : TENTATIVE DE SUPPRESSION DE CARTE INEXISTANTE DANS Joueur.playCarte(int val) !"); return null; }
+            else { throw new System.ArgumentException("Tentative de suppression d'une carte non présente dans le jeu"); }
         }
 
+
+        /// <summary>
+        /// Ajoute une carte VS aux cartes VS récupérées par le joueur
+        /// </summary>
+        /// <param name="carte"></param>
         public void giveCard(CarteVS carte)
         {
             pot.Add(carte);

@@ -47,11 +47,17 @@ namespace StupideVautour
             cartes.RemoveAt(i);
         }
 
-        public bool contient(CartePoints rem)
+
+        /// <summary>
+        /// Retourne si la main contient la carte d'une certaine valeur
+        /// </summary>
+        /// <param name="rem"></param>
+        /// <returns></returns>
+        public bool contient(int rem)
         {
             foreach (CartePoints c in cartes)
             {
-                if (c.getVal() == rem.getVal())
+                if (c.getVal() == rem)
                 {
                     return true;
                 }

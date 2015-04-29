@@ -30,7 +30,12 @@ namespace StupideVautour
             Program.print("\nJoueur " + name + " rejoint la partie...\n");
             System.Threading.Thread.Sleep(500);
         }
-
+        /// <summary>
+        /// Méthode de jeu du joueur,
+        /// Affiche les cartes VS récupérés, les cartes de la main du joueur
+        /// Demande au joueur de jouer une carte et vérifie qu'elle est présente dans sa main
+        /// </summary>
+        /// <returns></returns>
         public CartePoints play()
         {
             int a = -1;
@@ -68,7 +73,7 @@ namespace StupideVautour
                 afficheMain();
                 Console.WriteLine();
             }
-            while (!int.TryParse(Console.ReadLine(), out a) && a > 0 && a <= 15 || !estDansMain(a)) ;
+            while (!int.TryParse(Console.ReadLine(), out a) && a > 0 && a <= 15 || !main.contient(a)) ;
             return playCarte(a);
         }
       

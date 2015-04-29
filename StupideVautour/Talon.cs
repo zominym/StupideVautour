@@ -10,6 +10,10 @@ namespace StupideVautour
     {
         public List<CarteVS> cartes = new List<CarteVS>();
 
+
+        /// <summary>
+        /// Initialise un talon contenant les cartes souris de 1 à 10 et vautour de -1 à -5         /// 
+        /// </summary>
         public Talon()
         {
             for (int i = -5; i <= -1; i++)
@@ -24,6 +28,11 @@ namespace StupideVautour
 
         public Talon(int p){}
 
+
+        /// <summary>
+        /// Tire une carte du talon de manière aléatoire
+        /// </summary>
+        /// <returns></returns>
         public CarteVS tireCarte()
         {
             CarteVS temp = new CarteVS(0);
@@ -39,6 +48,10 @@ namespace StupideVautour
             return cartes;
         }
 
+        /// <summary>
+        /// Supprime une carte du talon
+        /// </summary>
+        /// <param name="c"></param>
         public void remove(CarteVS c)
         {
             CarteVS toRemove = null;

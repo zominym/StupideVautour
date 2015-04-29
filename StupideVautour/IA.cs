@@ -98,8 +98,11 @@ namespace StupideVautour
             return nbCardMorePrioritary;
         }
         
-        // Joue une carte de manière aléatoire
-        private CartePoints playRandom()
+        /// <summary>
+        /// Joue une carte de manière aléatoire
+        /// </summary>
+        /// <returns></returns>
+         private CartePoints playRandom()
         {
             CartePoints temp = new CartePoints(0);
             Random i = new Random();
@@ -197,7 +200,7 @@ namespace StupideVautour
                 for(int i = 15;i >0;i--)
                 {
                     // Dés qu'une carte n'est pas dans la liste des cartes joués, c'est la plus grande carte restante
-                    if(!mainPlayer.contient(new CartePoints(i)))
+                    if(!mainPlayer.contient(new CartePoints(i).getVal()))
                     {
                         bestCardPlayers.Add(new CartePoints(i));
                         break;
@@ -218,7 +221,7 @@ namespace StupideVautour
                 for (int i = 1; i < 16; i++)
                 {
                     // Dés qu'une carte n'est pas dans la liste des cartes joués, c'est la plus petit carte restante
-                    if (!mainPlayer.contient(new CartePoints(i)))
+                    if (!mainPlayer.contient(new CartePoints(i).getVal()))
                     {
                         worstCardPlayers.Add(new CartePoints(i));
                         break;
@@ -252,6 +255,8 @@ namespace StupideVautour
              * (sinon je peux établir un order sur les cartes restantes inférieures à mes "meilleures cartes que le joueur")
              */
             
+
+
             // Dans le cas ou aucune carte n'a été jouée, on ne peut appliquer de stratégie relative au cartes jouées on joue un coup "classique" 
             if (main.cartes.Count == 15)
             {
@@ -322,7 +327,7 @@ namespace StupideVautour
                         // Sinon on applique la stratégie de play in order
                         if((cardBetterThan.Count>=nbCardMoreProritaryThan) && (cardBetterThan.Count != 0))
                         {
-                             return playCarte(cardBetterThan.ElementAt(0).getVal());
+                            return playCarte(cardBetterThan.ElementAt(0).getVal());
                         }
                         else
                         {
@@ -333,7 +338,7 @@ namespace StupideVautour
 
                 case false:
                    
-
+                    // On ne peut pas gagner la manche si notre meilleure carte est moins bonne que la pire carte des joueurs
                     bool iCantAvoidVultur = myBestCard.getVal() < worstWorstCardOthers.getVal();
 
                     if(iCantAvoidVultur)
@@ -342,6 +347,8 @@ namespace StupideVautour
                     }
                     else 
                     {
+                        // Même logique que dans le cas de la souris
+                        // Sauf que pour eviter le vautour il suffit de jouer au dessus de la pire meilleure carte adverse
                         List<CartePoints> cardBetterThan = listCardBetterThan(worstBestCardOthers);
                         int nbCardMorePriorityThan = cardVSBetterThan(carteTournee);
                         if((cardBetterThan.Count>=nbCardMorePriorityThan) && (cardBetterThan.Count != 0))
