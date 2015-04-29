@@ -17,9 +17,9 @@ namespace StupideVautour
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("                     ___\n");
+                Console.Write("                 ___\n");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("                     Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
+                Console.Write("                 Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
                 System.Threading.Thread.Sleep(500);
                 Program.print("Quel est votre nom ? (Saisie autorisée : 3~20 chars)\n[ Le préfixe 'BOT' est réservé aux ordinateurs ]\n\n");
                 a = Console.ReadLine();

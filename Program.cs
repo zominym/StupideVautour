@@ -12,6 +12,7 @@ namespace StupideVautour
         static int tour = 0;
         static bool isSouris = true;
         static int val = 0;
+        static int nbRest = 16;
 
         static void Main(string[] args)
         {
@@ -19,7 +20,7 @@ namespace StupideVautour
             Console.ReadLine();
 
             Console.Clear();
-            print("\n                     Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
+            print("\n                 Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
 
             List<Main> playedCards = new List<Main>();
             List<CarteVS> turnedCards = new List<CarteVS>();
@@ -32,9 +33,9 @@ namespace StupideVautour
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("                           _________________\n");
+                Console.Write("                       _________________\n");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("                     Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
+                Console.Write("                 Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
                 print("Combien de joueurs IA en plus de vous ? (Saisie autorisée : 1~4)\n\n");
             }
             while (!int.TryParse(Console.ReadLine(), out nbJoueurs) || nbJoueurs > 4 || nbJoueurs < 1);
@@ -51,9 +52,9 @@ namespace StupideVautour
             
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("                                                                    ___\n");
+            Console.Write("                                                                ___\n");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("                     Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
+            Console.Write("                 Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
             print("Création et mélange d'un jeu de cartes...\n\n");
             System.Threading.Thread.Sleep(500);
 
@@ -74,8 +75,8 @@ namespace StupideVautour
             System.Threading.Thread.Sleep(500);
 
             Console.Clear();
-            print("\n                    Partie de " + playerName + "\n\n");
-            print("\n");
+            Console.WriteLine("");
+            Console.WriteLine("Partie de " + playerName + ", Tour : " + tour + ", Cartes restantes : " + nbRest + " (y compris celle-ci).\n\n");
 
             CarteVS carte = new CarteVS(0);
 
@@ -85,7 +86,7 @@ namespace StupideVautour
             {
 
                 /* TIRAGE DE LA CARTE DU TALON */
-                if (!rejouer) { carte = talon.tireCarte(); }
+                if (!rejouer) { carte = talon.tireCarte(); --nbRest; }
                 if (rejouer) { rejouer = false; }
                 isSouris = carte.isSouris();
                 val = carte.getVal();
@@ -263,7 +264,7 @@ namespace StupideVautour
             {
                 Console.Clear();
                 Console.WriteLine("");
-                Console.WriteLine("                    Partie de " + playerName + ", Tour : " + tour + "\n\n");
+                Console.WriteLine("Partie de " + playerName + ", Tour : " + tour + ", Cartes restantes : " + nbRest + " (y compris celle-ci).\n\n");
                 if (isSouris) { print("Carte SOURIS retournée ! Sa valeur est : "); }
                 else { print("Carte VAUTOUR retournée ! Sa valeur est : "); }
                 print(val + ".\n\n");
@@ -272,7 +273,7 @@ namespace StupideVautour
             {
                 Console.Clear();
                 Console.WriteLine("");
-                Console.WriteLine("                    Partie de " + playerName + ", Tour : " + tour + "\n\n");
+                Console.WriteLine("Partie de " + playerName + ", Tour : " + tour + ", Cartes restantes : " + nbRest + " (y compris celle-ci).\n\n");
                 if (isSouris) { Console.Write("Carte SOURIS retournée ! Sa valeur est : "); }
                 else { Console.Write("Carte VAUTOUR retournée ! Sa valeur est : "); }
                 Console.Write(val + ".\n\n");

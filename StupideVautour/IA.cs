@@ -31,16 +31,16 @@ namespace StupideVautour
 
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("                                               __________________\n");
+            Console.Write("                                           __________________\n");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("                     Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
+            Console.Write("                 Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
             Program.print("Joueur " + name + " a rejoint la partie...\n");
             int diff;
             do
             {
                 Program.print("Quelle difficulté pour le joueur " + this.getName() + " ?\n");
-                Console.Write("Aléatoire          |         Facile        |        Difficile\n");
-                Console.Write("    0                           1                       2    \n\n");
+                Console.Write("Facile          |         Moyen        |        Difficile\n");
+                Console.Write("   0                        1                       2    \n\n");
             }
             while (!int.TryParse(Console.ReadLine(), out diff) || diff > 3 || diff < 0);
             this.setDifficulty(diff);
@@ -236,7 +236,7 @@ namespace StupideVautour
                 // Parcourt les cartes dans l'ordre croissant
                 for (int i = 1; i < 16; i++)
                 {
-                    // Dés qu'une carte n'est pas dans la liste des cartes joués, c'est la plus petit carte restante
+                    // Dès qu'une carte n'est pas dans la liste des cartes joués, c'est la plus petit carte restante
                     if (!mainPlayer.contient(new CartePoints(i).getVal()))
                     {
                         worstCardPlayers.Add(new CartePoints(i));
@@ -248,7 +248,7 @@ namespace StupideVautour
         }
 
 
-        /* IA PlayMemory : Se rappelle chaque carte jouee par chaque joueur,
+        /* IA PlayMemory : Se rappelle chaque carte jouée par chaque joueur,
         * se rappelle aussi chaque carte du talon déjà jouée
         * en déduit des informations comme :
         * - a-t-elle la meilleure carte de tous les joueurs ? Dans le cas d'une carte souris retournée
