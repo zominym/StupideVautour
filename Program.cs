@@ -19,19 +19,22 @@ namespace StupideVautour
             Console.ReadLine();
 
             Console.Clear();
-            print("\n                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
+            print("\n                     Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
 
             List<Main> playedCards = new List<Main>();
             List<CarteVS> turnedCards = new List<CarteVS>();
-            Humain player = new Humain();
+            List<Joueur> players = new List<Joueur>();
+            players.Add(new Humain());
             
             int nbJoueurs;
             
             do
             {
                 Console.Clear();
-                Console.Write("                           ___________\n");
-                Console.Write("                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("                           _________________\n");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("                     Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
                 print("Combien de joueurs IA en plus de vous ? (Saisie autorisée : 1~4)\n\n");
             }
             while (!int.TryParse(Console.ReadLine(), out nbJoueurs) || nbJoueurs > 4 || nbJoueurs < 1);
@@ -41,34 +44,16 @@ namespace StupideVautour
             System.Threading.Thread.Sleep(500);
 
             nbJoueurs++;
-            List<IA> IAs = new List<IA>();
             for (int i = 1; i < nbJoueurs; i++)
             {
-                IAs.Add(new IA(i));
+                players.Add(new IA(i));
             }
-
-
-            foreach (IA ia in IAs)
-            {
-                Console.Clear();
-                Console.Write("                                         __________\n");
-                Console.Write("                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
-                if (ia.getID() == 0) { print("Détermination de la difficulté des joueurs :\n\n"); }
-                else { Console.Write("Détermination de la difficulté des joueurs :\n\n"); }
-                int diff;
-                do
-                {
-                    print("Quelle difficulté pour le joueur " + ia.getName() + " ?\n");
-                    Console.Write("Aléatoire          |         Facile        |        Difficile\n");
-                    Console.Write("    0                           1                       2    \n\n");
-                }
-                while (!int.TryParse(Console.ReadLine(), out diff) || diff > 3 || diff < 0);
-                ia.setDifficulty(diff);
-            }
-
+            
             Console.Clear();
-            Console.Write("                                                      ___\n");
-            Console.Write("                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("                                                                    ___\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("                     Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
             print("Création et mélange d'un jeu de cartes...\n\n");
             System.Threading.Thread.Sleep(500);
 
@@ -109,11 +94,10 @@ namespace StupideVautour
                 
                 /* CHAQUE JOUEUR JOUE UNE CARTE */
                 CartePoints[] cartes = new CartePoints[nbJoueurs];
-                foreach (IA ia in IAs)
+                foreach (Joueur pl in players)
                 {
-                    cartes[ia.getID()] = ia.play(carte, playedCards, turnedCards);
+                    cartes[pl.getID()] = pl.play(carte, playedCards, turnedCards);
                 }
-                cartes[0] = player.play();
                 
 
 
@@ -125,10 +109,9 @@ namespace StupideVautour
 
 
                 /* AFFICHAGE DES CARTES JOUEES */
-                print("\nLe joueurs " + player.getName() + " joue sa carte : " + cartes[0].getVal() + ".\n");
-                foreach (IA ia in IAs)
+                foreach (Joueur pl in players)
                 {
-                    print("\nLe joueur " + ia.getName() + " joue sa carte : " + cartes[ia.getID()].getVal() + ".\n");
+                    print("\nLe joueur " + pl.getName() + " joue sa carte : " + cartes[pl.getID()].getVal() + ".\n");
                 }
 
 
@@ -184,11 +167,10 @@ namespace StupideVautour
                             }
                         }
                     }
-                    if (max == 0) { rejouer = true; print("Égalité ! On rejoue pour la même carte !"); }
+                    if (max == 0) { rejouer = true; print("\nÉgalité ! On rejoue pour la même carte !"); }
                     else
                     {
-                        if (ID == 0) { player.giveCard(carte); print("\nLa carte va à " + player.getName() + ".\n"); }
-                        else { ID--; IAs.ElementAt(ID).giveCard(carte); print("\nLa carte va à " + IAs.ElementAt(ID).getName() + ".\n"); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
+                        players.ElementAt(ID).giveCard(carte); print("\nLa carte va à " + players.ElementAt(ID).getName() + ".");
                         turnedCards.Add(carte); // Si non-égalité, on ajoute la carte à l'historique des cartes prises
                     }
                 }
@@ -207,12 +189,11 @@ namespace StupideVautour
                             }
                         }
                     }
-                    if (min == 20) { rejouer = true; print("Égalité ! On rejoue pour la même carte !"); }
+                    if (min == 20) { rejouer = true; print("\nÉgalité ! On rejoue pour la même carte !"); }
                     else
                     {
-                        if (ID == 0) { player.giveCard(carte); print("\nLa carte va à " + player.getName() + ".\n"); }
-                        else { ID--; IAs.ElementAt(ID).giveCard(carte); print("\nLa carte va à " + IAs.ElementAt(ID).getName() + ".\n"); } /* bug potentiel si la liste n'est pas rangée dans l'ordre des indices */
-                        turnedCards.Add(carte); // Si non-égalité, on ajoute la carte à l'historique des cartes prises(
+                        players.ElementAt(ID).giveCard(carte); print("\nLa carte va à " + players.ElementAt(ID).getName() + ".");
+                        turnedCards.Add(carte); // Si non-égalité, on ajoute la carte à l'historique des cartes prises
                     }
                 }
                 Console.ReadLine();
@@ -224,33 +205,23 @@ namespace StupideVautour
             print("Et voici le classement :\n");
 
 
-            int playerScore = player.getPoints();
-            for (int i = 0; i < nbJoueurs; i++)
+            int playerScore = players.ElementAt(0).getPoints();
+
+            players.Sort(
+                delegate(Joueur p1, Joueur p2)
+                {
+                    if (p1.getPoints() < p2.getPoints()) { return 1; }
+                    if (p1.getPoints() == p2.getPoints()) { return 0; }
+                    if (p1.getPoints() > p2.getPoints()) { return -1; }
+                    return 0;
+                }
+            );
+
+            int pos = 1;
+            foreach (Joueur pl in players)
             {
-                IA stock = new IA();
-                int maxIA = -20;
-                foreach (IA ia in IAs)
-                {
-                    if (ia.getPoints() >= maxIA)
-                    {
-                        stock = ia;
-                        maxIA = ia.getPoints();
-                    }
-                }
-                if (maxIA > playerScore)
-                {
-                    print("N° " + (i+1) + ": " + stock.getName() + " avec " + stock.getPoints() + " points.");
-                    IAs.Remove(stock);
-                }
-                else
-                {
-                    print("N° " + (i+1) + ": " + player.getName() + " avec " + player.getPoints() + " points.");
-                    playerScore = -20;
-                }
-            }
-            if (playerScore != -20)
-            {
-                print("N° " + nbJoueurs + ": " + player.getName() + " avec " + player.getPoints() + " points.");
+                print("N° " + pos + " : " + pl.getName() + " avec " + pl.getPoints() + " points.\n");
+                ++pos;
             }
 
             Console.ReadLine();
