@@ -16,8 +16,10 @@ namespace StupideVautour
             do
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("                     ___\n");
-                Console.Write("                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("                     Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
                 System.Threading.Thread.Sleep(500);
                 Program.print("Quel est votre nom ? (Saisie autorisée : 3~20 chars)\n[ Le préfixe 'BOT' est réservé aux ordinateurs ]\n\n");
                 a = Console.ReadLine();
@@ -36,7 +38,8 @@ namespace StupideVautour
         /// Demande au joueur de jouer une carte et vérifie qu'elle est présente dans sa main
         /// </summary>
         /// <returns></returns>
-        public CartePoints play()
+
+        public override CartePoints play(CarteVS ca, List<Main> playedCards, List<CarteVS> turnedCards)
         {
             int a = -1;
             Program.printPartie(true);
@@ -49,12 +52,13 @@ namespace StupideVautour
             {
                 foreach (CarteVS c in pot)
                 {
-                    Program.print(c.getVal() + " ");
+                    Program.print(c.getVal() + "  ");
                 }
             }
             Program.print("\n\nQuelle carte voulez-vous jouer ? (Saisie autorisée : 1~15 si la carte existe)\n");
+            afficheMain();
             Console.WriteLine();
-            do
+            while (!int.TryParse(Console.ReadLine(), out a) && a > 0 && a <= 15 || !estDansMain(a))
             {
                 Program.printPartie(false);
                 Console.Write("Voici les cartes que vous avez déjà récupérées :\n");
@@ -66,14 +70,13 @@ namespace StupideVautour
                 {
                     foreach (CarteVS c in pot)
                     {
-                        Console.Write(c.getVal() + " ");
+                        Console.Write(c.getVal() + "  ");
                     }
                 }
                 Console.Write("\n\nQuelle carte voulez-vous jouer ? (Saisie autorisée : 1~15 si la carte existe)\n");
                 afficheMain();
                 Console.WriteLine();
             }
-            while (!int.TryParse(Console.ReadLine(), out a) && a > 0 && a <= 15 || !main.contient(a)) ;
             return playCarte(a);
         }
       
