@@ -280,7 +280,7 @@ namespace StupideVautour
 
 
             List<CartePoints> worstCardsOther = worstCardPlayers(playedCardsOther);
-            CartePoints worstWorstCardOthers = worstCardsOther.ElementAt(0);
+            CartePoints worstWorstCardOthers = worstCardsOther.ElementAt(worstCardsOther.Count-1);
             foreach (CartePoints card in worstCardsOther)
             {
                 if (card.getVal() < worstWorstCardOthers.getVal())
