@@ -62,7 +62,6 @@ namespace StupideVautour
                 }
             }
             return false;
-
         }     
 
         public CartePoints playCarte(int val)

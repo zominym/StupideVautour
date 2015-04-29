@@ -31,12 +31,7 @@ namespace StupideVautour
                 default: name = "BOT_ERROR"; break;
             }
             this.diff = 0;
-            Program.print("Joueur " + name + " a rejoint la partie.");
-            System.Threading.Thread.Sleep(500);
-            Program.print(".");
-            System.Threading.Thread.Sleep(500);
-            Program.print(".\n");
-            System.Threading.Thread.Sleep(500);
+            Program.print("Joueur " + name + " a rejoint la partie...\n");
         }
 
         public void setDifficulty(int i)
@@ -145,7 +140,7 @@ namespace StupideVautour
             }
             int pos = pos1;
             pos2++;
-            //print("DEBUG : Alea entre " + pos1 + " et " + pos2);
+            //Program.print("DEBUG : Alea entre " + pos1 + " et " + pos2);
             Random rand = new Random();
             pos = rand.Next(0, 1);
             if (pos == 1)
@@ -156,12 +151,14 @@ namespace StupideVautour
             {
                 pos = pos2;
             }
-            if (main.cartes.Count() > 5) { pos += rand.Next(-1, 1); }
+            if (main.cartes.Count() > 5 && main.cartes.Count() <= 10) { pos += rand.Next(-1, 1); }
+            if (main.cartes.Count() > 10) { pos += rand.Next(-2, 2); }
+            //Console.Write("pos :" + pos); Console.ReadLine();
             if(pos < 0)
             {
                 pos = 0;
             }
-            if(pos > main.cartes.Count())
+            if(pos >= main.cartes.Count())
             {
                 pos = main.cartes.Count() - 1;
             }
@@ -314,7 +311,7 @@ namespace StupideVautour
                             return playInOrder(carteTournee,turnedCards);
                         }
                     }
-                    break;
+
 
                 case false:
                    
@@ -339,8 +336,7 @@ namespace StupideVautour
                             return playInOrder(carteTournee, turnedCards);
                         }                        
                     }
-                                      
-                    break;
+                            
 
                 default:
                     break;

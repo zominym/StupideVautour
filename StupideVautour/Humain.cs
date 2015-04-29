@@ -27,22 +27,30 @@ namespace StupideVautour
             if (a.Length > 20) { a = a.Remove(20); }
             name = a;
             Program.playerName = name;
-            Program.print("\nJoueur " + name + " rejoint la partie.");
-            System.Threading.Thread.Sleep(500);
-            Program.print(".");
-            System.Threading.Thread.Sleep(500);
-            Program.print(".\n");
+            Program.print("\nJoueur " + name + " rejoint la partie...\n");
             System.Threading.Thread.Sleep(500);
         }
 
         public CartePoints play()
         {
             int a = -1;
-            Program.printPartie("Quelle carte voulez-vous jouer ? (Saisie autorisée : 1~15 si la carte existe)\n", true);
+            Program.printPartie(true);
+            Program.print("Voici les cartes que vous avez déjà récupérées :\n");
+            foreach (CarteVS c in pot)
+            {
+                Console.Write(c.getVal() + " ");
+            }
+            Program.print("\n\nQuelle carte voulez-vous jouer ? (Saisie autorisée : 1~15 si la carte existe)\n");
             Console.WriteLine();
             do
             {
-                Program.printPartie("Quelle carte voulez-vous jouer ? (Saisie autorisée : 1~15 si la carte existe)\n", false);
+                Program.printPartie(false);
+                Console.Write("Voici les cartes que vous avez déjà récupérées :");
+                foreach (CarteVS c in pot)
+                {
+                    Console.Write(c.getVal() + " ");
+                }
+                Console.Write("\n\nQuelle carte voulez-vous jouer ? (Saisie autorisée : 1~15 si la carte existe)\n");
                 afficheMain();
                 Console.WriteLine();
             }

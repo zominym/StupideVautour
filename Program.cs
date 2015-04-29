@@ -20,7 +20,6 @@ namespace StupideVautour
 
             Console.Clear();
             print("\n                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
-            System.Threading.Thread.Sleep(500);
 
             List<Main> playedCards = new List<Main>();
             List<CarteVS> turnedCards = new List<CarteVS>();
@@ -33,18 +32,12 @@ namespace StupideVautour
                 Console.Clear();
                 Console.Write("                           ___________\n");
                 Console.Write("                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
-                print("Combien de joueurs IA en plus de vous ? (Saisie autorisée : 1~4)\n\n");  /* FAIRE LE "AJOUTER UNE IA (0=débile, 1=random)" */
+                print("Combien de joueurs IA en plus de vous ? (Saisie autorisée : 1~4)\n\n");
             }
             while (!int.TryParse(Console.ReadLine(), out nbJoueurs) || nbJoueurs > 4 || nbJoueurs < 1);
 
 
-            print("\nAjout de " + nbJoueurs + " joueurs Ordinateur.");
-            System.Threading.Thread.Sleep(500);
-            print(".");
-            System.Threading.Thread.Sleep(500);
-            print(".\n\n");
-            System.Threading.Thread.Sleep(500);
-
+            print("\nAjout de " + nbJoueurs + " joueurs Ordinateur...\n\n");
 
             nbJoueurs++;
             List<IA> IAs = new List<IA>();
@@ -52,6 +45,9 @@ namespace StupideVautour
             {
                 IAs.Add(new IA(i));
             }
+
+            System.Threading.Thread.Sleep(500);
+
             foreach (IA ia in IAs)
             {
                 Console.Clear();
@@ -63,8 +59,8 @@ namespace StupideVautour
                 do
                 {
                     print("Quelle difficulté pour le joueur " + ia.getName() + " ?\n");
-                    print("Aléatoire          |         Facile\n");
-                    print("    0                           1  \n\n");
+                    Console.Write("Aléatoire          |         Facile        |        Difficile\n");
+                    Console.Write("    0                           1                       2    \n\n");
                 }
                 while (!int.TryParse(Console.ReadLine(), out diff) || diff > 3 || diff < 0);
                 ia.setDifficulty(diff);
@@ -73,11 +69,7 @@ namespace StupideVautour
             Console.Clear();
             Console.Write("                                                      ___\n");
             Console.Write("                     Nom > Nombre d'IA > Difficulté > Jeu \n\n");
-            print("Création et mélange d'un jeu de cartes.");
-            System.Threading.Thread.Sleep(500);
-            print(".");
-            System.Threading.Thread.Sleep(500);
-            print(".\n\n");
+            print("Création et mélange d'un jeu de cartes...\n\n");
             System.Threading.Thread.Sleep(500);
 
 
@@ -87,7 +79,6 @@ namespace StupideVautour
             {
                 playedCards.Add(new Main());
             }
-
 
             print("\n");
             print("Début du jeu !");
@@ -290,10 +281,12 @@ namespace StupideVautour
 
         static void afficheMenu()
         {
-            printspecial("   _____ _               _     _        \n  / ____| |             (_)   | |       \n | (___ | |_ _   _ _ __  _  __| | ___   \n  \\___ \\| __| | | | '_ \\| |/ _` |/ _ \\  \n  ____) | |_| |_| | |_) | | (_| |  __/  \n |_____/ \\__|\\__,_| .__/|_|\\__,_|\\___|  \n                  | |                   \n                  |_|                   \n __      __         _\n \\ \\    / /        | |                  \n  \\ \\  / /_ _ _   _| |_ ___  _   _ _ __ \n   \\ \\/ / _` | | | | __/ _ \\| | | | '__|\n    \\  / (_| | |_| | || (_) | |_| | |   \n     \\/ \\__,_|\\__,_|\\__\\___/ \\__,_|_|   ");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("   _____ _               _     _        \n  / ____| |             (_)   | |       \n | (___ | |_ _   _ _ __  _  __| | ___   \n  \\___ \\| __| | | | '_ \\| |/ _` |/ _ \\  \n  ____) | |_| |_| | |_) | | (_| |  __/  \n |_____/ \\__|\\__,_| .__/|_|\\__,_|\\___|  \n                  | |                   \n                  |_|                   \n __      __         _\n \\ \\    / /        | |                  \n  \\ \\  / /_ _ _   _| |_ ___  _   _ _ __ \n   \\ \\/ / _` | | | | __/ _ \\| | | | '__|\n    \\  / (_| | |_| | || (_) | |_| | |   \n     \\/ \\__,_|\\__,_|\\__\\___/ \\__,_|_|   ");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
-        public static void printPartie(String s, bool defil)
+        public static void printPartie(bool defil)
         {
             if (defil)
             {
@@ -303,11 +296,6 @@ namespace StupideVautour
                 if (isSouris) { print("Carte SOURIS retournée ! Sa valeur est : "); }
                 else { print("Carte VAUTOUR retournée ! Sa valeur est : "); }
                 print(val + ".\n\n");
-                for (int i = 0; i < s.Length; i++)
-                {
-                    Console.Write(s[i]);
-                    System.Threading.Thread.Sleep(10);
-                }
             }
             else
             {
@@ -317,7 +305,6 @@ namespace StupideVautour
                 if (isSouris) { Console.Write("Carte SOURIS retournée ! Sa valeur est : "); }
                 else { Console.Write("Carte VAUTOUR retournée ! Sa valeur est : "); }
                 Console.Write(val + ".\n\n");
-                Console.Write(s);
             }
 
         }
