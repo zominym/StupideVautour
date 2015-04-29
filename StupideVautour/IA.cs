@@ -10,14 +10,10 @@ namespace StupideVautour
     {
 
         int diff;
-        Main myPlayedCards = new Main();
         Talon t = null;
+        Random rand = new Random();
 
-        public IA()
-            :base(-1)
-        {
-            // TODO: Complete member initialization
-        }
+        public IA() :base(-1) {}
 
         public IA(int i)
         :base(i)
@@ -32,6 +28,7 @@ namespace StupideVautour
             }
             this.diff = 0;
             Program.print("Joueur " + name + " a rejoint la partie...\n");
+            System.Threading.Thread.Sleep(500);
         }
 
         public void setDifficulty(int i)
@@ -106,13 +103,24 @@ namespace StupideVautour
         {
             CartePoints temp = new CartePoints(0);
             Random i = new Random();
-            int pos = (int)i.Next(main.count());
+            int pos = i.Next(main.count());
             temp = main.cartes.ElementAt(pos);
-            myPlayedCards.cartes.Add(main.cartes.ElementAt(pos));
             main.cartes.RemoveAt(pos);
             return temp;
         }
 
+
+
+
+        /* Order : Chaque carte Vautour/Souris a une importance,
+         * il retournne la carte à points qui a la même importance
+         * (souris 10 et carte 15 ont la même importance [maximale]
+         * Cependant l'ordre n'est pas croissant car il vaut mieux éviter
+         * une carte vautour -5 que ramasser une carte souris 4
+         * On rajoute un aléatoire si l'on est en début de partie,
+         * un aléatoire plus léger en milieu de partie,
+         * et aucun aléatoire en fin de partie.
+         */
         private int Order(CarteVS carte, List<CarteVS> hist)
         {
             t = new Talon(0);
@@ -138,19 +146,15 @@ namespace StupideVautour
                 if (Math.Abs(c.getVal()) > Math.Abs(carte.getVal()))
                 {
                     pos1--;
-                    //print("DEBUG : PlayInOrder : pos1-- car " + c.getVal() + " > " + carte.getVal());
                 }
                 if (Math.Abs(c.getVal()) >= Math.Abs(carte.getVal()))
                 {
                     pos2--;
-                    //print("DEBUG : PlayInOrder : pos2-- car " + c.getVal() + " >= " + carte.getVal());
                 }
             }
             int pos = pos1;
             pos2++;
-            //Program.print("DEBUG : Alea entre " + pos1 + " et " + pos2);
-            Random rand = new Random();
-            pos = rand.Next(0, 1);
+            pos = rand.Next(0, 2);
             if (pos == 1)
             {
                 pos = pos1;
@@ -159,28 +163,24 @@ namespace StupideVautour
             {
                 pos = pos2;
             }
-            if (main.cartes.Count() > 5 && main.cartes.Count() <= 10) { pos += rand.Next(-1, 1); }
-            if (main.cartes.Count() > 10) { pos += rand.Next(-2, 2); }
-            //Console.Write("pos :" + pos); Console.ReadLine();
-            if(pos < 0)
-            {
-                pos = 0;
-            }
-            if(pos >= main.cartes.Count())
-            {
-                pos = main.cartes.Count() - 1;
-            }
-            myPlayedCards.cartes.Add(main.cartes.ElementAt(pos));
+            int posBis = 0;
+            if (main.cartes.Count() > 10) { posBis = pos + rand.Next(-2, 3); } // Si on est en début de partie, grand aléatoire
+            if (main.cartes.Count() > 5 && main.cartes.Count() <= 10) { posBis = pos + rand.Next(-1, 2); } // Si on est en milieu de partie, petit aléatoire
+            
+            if(posBis < 0) { posBis = 0; }
+            if(posBis >= main.cartes.Count()) { posBis = main.cartes.Count() - 1; }
+            if (pos < 0) { pos = 0; }
+            if (pos >= main.cartes.Count()) { pos = main.cartes.Count() - 1; }
+
+            int val = main.cartes.ElementAt(pos).getVal();
+            int valBis = main.cartes.ElementAt(posBis).getVal();
+            if (Math.Abs(val - valBis) <= 3) { pos = posBis; }
+            // Si la valeur de la carte non aléatoire n'est pas trop éloignée de celle de la carte aléatoire, on la retient
+
             return (main.cartes.ElementAt(pos).getVal());
         }
 
 
-        /* IA PlayInOrder : Chaque carte Vautour/Souris a une importance,
-         * il joue la carte à points qui a la même importance
-         * (souris 10 et carte 15 ont la même importance (maximale)
-         * Cependant l'ordre change car il vaut mieux éviter
-         * une carte vautour -5 que ramasser une carte souris 4
-         */
         private CartePoints playInOrder(CarteVS c, List<CarteVS> hist)
         {
             return playCarte(Order(c,hist));
@@ -232,11 +232,10 @@ namespace StupideVautour
         /* IA PlayMemory : Se rappelle chaque carte jouee par chaque joueur,
         * se rappelle aussi chaque carte du talon déjà jouée
         * en déduit des informations comme :
-        * - a-t-elle la meilleure carte ?
-        * - a-t-elle la pire carte ?
-        * Suit la même règle d'importance que playInOrder ???
+        * - a-t-elle la meilleure carte de tous les joueurs ? Dans le cas d'une carte souris retournée
+        * - a-t-elle une carte meilleure que la meilleure d'un joueur ? Dans le cas d'une carte vautour retournée
+        * Suit la même règle d'importance que playInOrder sinon.
         */
-      
         private CartePoints playMemory(CarteVS carteTournee, List<Main> playedCards, List<CarteVS> turnedCards)
         {
             /*
@@ -323,7 +322,6 @@ namespace StupideVautour
                         // Sinon on applique la stratégie de play in order
                         if((cardBetterThan.Count>=nbCardMoreProritaryThan) && (cardBetterThan.Count != 0))
                         {
-                            myPlayedCards.cartes.Add(cardBetterThan.ElementAt(0));
                              return playCarte(cardBetterThan.ElementAt(0).getVal());
                         }
                         else
@@ -348,7 +346,6 @@ namespace StupideVautour
                         int nbCardMorePriorityThan = cardVSBetterThan(carteTournee);
                         if((cardBetterThan.Count>=nbCardMorePriorityThan) && (cardBetterThan.Count != 0))
                         {
-                            myPlayedCards.cartes.Add(cardBetterThan.ElementAt(0));
                             return playCarte(cardBetterThan.ElementAt(0).getVal());
                         }
                         else
@@ -362,9 +359,7 @@ namespace StupideVautour
                     break;
  
             }
-            /* ATTENTION NE PAS OUBLIER LE CAS OU L'HISTORIQUE EST VIDE ! */
             return new CartePoints(-1);
-            
         }
     }
 }
