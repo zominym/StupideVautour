@@ -95,7 +95,7 @@ namespace StupideVautour
         {
             CartePoints temp = new CartePoints(0);
             Random i = new Random();
-            int pos = (int)i.Next(main.count());
+            int pos = i.Next(main.count());
             temp = main.cartes.ElementAt(pos);
             main.cartes.RemoveAt(pos);
             return temp;
@@ -146,7 +146,7 @@ namespace StupideVautour
             }
             int pos = pos1;
             pos2++;
-            pos = rand.Next(0, 1);
+            pos = rand.Next(0, 2);
             if (pos == 1)
             {
                 pos = pos1;
@@ -156,8 +156,8 @@ namespace StupideVautour
                 pos = pos2;
             }
             int posBis = 0;
-            if (main.cartes.Count() > 10) { posBis = pos + rand.Next(-2, 2); } // Si on est en début de partie, grand aléatoire
-            if (main.cartes.Count() > 5 && main.cartes.Count() <= 10) { posBis = pos + rand.Next(-1, 1); } // Si on est en milieu de partie, petit aléatoire
+            if (main.cartes.Count() > 10) { posBis = pos + rand.Next(-2, 3); } // Si on est en début de partie, grand aléatoire
+            if (main.cartes.Count() > 5 && main.cartes.Count() <= 10) { posBis = pos + rand.Next(-1, 2); } // Si on est en milieu de partie, petit aléatoire
             
             if(posBis < 0) { posBis = 0; }
             if(posBis >= main.cartes.Count()) { posBis = main.cartes.Count() - 1; }

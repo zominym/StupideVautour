@@ -264,7 +264,7 @@ namespace StupideVautour
             for (int i = 0; i < s.Length; i++)
             {
                 Console.Write(s[i]);
-                System.Threading.Thread.Sleep(10);
+                System.Threading.Thread.Sleep(1);
             }
 
         }
