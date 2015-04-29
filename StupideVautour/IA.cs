@@ -27,8 +27,24 @@ namespace StupideVautour
                 default: name = "BOT_ERROR"; break;
             }
             this.diff = 0;
-            Program.print("Joueur " + name + " a rejoint la partie...\n");
             System.Threading.Thread.Sleep(500);
+
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("                                               __________________\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("                     Nom > Nombre de Joueurs > Paramétrage des IA > Jeu \n\n");
+            Program.print("Joueur " + name + " a rejoint la partie...\n");
+            int diff;
+            do
+            {
+                Program.print("Quelle difficulté pour le joueur " + this.getName() + " ?\n");
+                Console.Write("Aléatoire          |         Facile        |        Difficile\n");
+                Console.Write("    0                           1                       2    \n\n");
+            }
+            while (!int.TryParse(Console.ReadLine(), out diff) || diff > 3 || diff < 0);
+            this.setDifficulty(diff);
+
         }
 
         public void setDifficulty(int i)
@@ -36,7 +52,7 @@ namespace StupideVautour
             this.diff = i;
         }
 
-        public CartePoints play(CarteVS carteTournee, List<Main> playedCards, List<CarteVS> turnedCards)
+        public override CartePoints play(CarteVS carteTournee, List<Main> playedCards, List<CarteVS> turnedCards)
         {
             switch (diff)
             {

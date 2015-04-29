@@ -28,6 +28,12 @@ namespace StupideVautour
             return name;
         }
 
+        public virtual CartePoints play(CarteVS c, List<Main> playedCards, List<CarteVS> turnedCards)
+        {
+            Console.WriteLine("ERROR : Joueur.play() is called, should be Humainlay() or IA.play()");
+            return null;
+        }
+
         public int getPoints()
         {
             return points;
