@@ -36,19 +36,33 @@ namespace StupideVautour
             int a = -1;
             Program.printPartie(true);
             Program.print("Voici les cartes que vous avez déjà récupérées :\n");
-            foreach (CarteVS c in pot)
+            if (pot.Count() == 0)
             {
-                Console.Write(c.getVal() + " ");
+                Program.print("Vous n'avez aucune carte pour le moment");
+            }
+            else
+            {
+                foreach (CarteVS c in pot)
+                {
+                    Program.print(c.getVal() + " ");
+                }
             }
             Program.print("\n\nQuelle carte voulez-vous jouer ? (Saisie autorisée : 1~15 si la carte existe)\n");
             Console.WriteLine();
             do
             {
                 Program.printPartie(false);
-                Console.Write("Voici les cartes que vous avez déjà récupérées :");
-                foreach (CarteVS c in pot)
+                Console.Write("Voici les cartes que vous avez déjà récupérées :\n");
+                if (pot.Count() == 0)
                 {
-                    Console.Write(c.getVal() + " ");
+                    Console.Write("Vous n'avez aucune carte pour le moment");
+                }
+                else
+                {
+                    foreach (CarteVS c in pot)
+                    {
+                        Console.Write(c.getVal() + " ");
+                    }
                 }
                 Console.Write("\n\nQuelle carte voulez-vous jouer ? (Saisie autorisée : 1~15 si la carte existe)\n");
                 afficheMain();

@@ -11,12 +11,9 @@ namespace StupideVautour
 
         int diff;
         Talon t = null;
+        Random rand = new Random();
 
-        public IA()
-            :base(-1)
-        {
-            // TODO: Complete member initialization
-        }
+        public IA() :base(-1) {}
 
         public IA(int i)
         :base(i)
@@ -31,6 +28,7 @@ namespace StupideVautour
             }
             this.diff = 0;
             Program.print("Joueur " + name + " a rejoint la partie...\n");
+            System.Threading.Thread.Sleep(500);
         }
 
         public void setDifficulty(int i)
@@ -148,7 +146,6 @@ namespace StupideVautour
             }
             int pos = pos1;
             pos2++;
-            Random rand = new Random();
             pos = rand.Next(0, 1);
             if (pos == 1)
             {
@@ -164,10 +161,13 @@ namespace StupideVautour
             
             if(posBis < 0) { posBis = 0; }
             if(posBis >= main.cartes.Count()) { posBis = main.cartes.Count() - 1; }
+            if (pos < 0) { pos = 0; }
+            if (pos >= main.cartes.Count()) { pos = main.cartes.Count() - 1; }
 
             int val = main.cartes.ElementAt(pos).getVal();
             int valBis = main.cartes.ElementAt(posBis).getVal();
-            if (Math.Abs(val - valBis) <= 3) { pos = posBis; } // Si la valeur de la carte non aléatoire est trop éloignée de celle de la carte aléatoire, on ne la retient pas
+            if (Math.Abs(val - valBis) <= 3) { pos = posBis; }
+            // Si la valeur de la carte non aléatoire n'est pas trop éloignée de celle de la carte aléatoire, on la retient
 
             return (main.cartes.ElementAt(pos).getVal());
         }
@@ -339,9 +339,7 @@ namespace StupideVautour
                     break;
  
             }
-            /* ATTENTION NE PAS OUBLIER LE CAS OU L'HISTORIQUE EST VIDE ! */
             return new CartePoints(-1);
-            
         }
     }
 }

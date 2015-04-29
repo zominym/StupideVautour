@@ -38,6 +38,7 @@ namespace StupideVautour
 
 
             print("\nAjout de " + nbJoueurs + " joueurs Ordinateur...\n\n");
+            System.Threading.Thread.Sleep(500);
 
             nbJoueurs++;
             List<IA> IAs = new List<IA>();
@@ -46,7 +47,6 @@ namespace StupideVautour
                 IAs.Add(new IA(i));
             }
 
-            System.Threading.Thread.Sleep(500);
 
             foreach (IA ia in IAs)
             {
@@ -184,7 +184,7 @@ namespace StupideVautour
                             }
                         }
                     }
-                    if (max == 0) { rejouer = true; }
+                    if (max == 0) { rejouer = true; print("Égalité ! On rejoue pour la même carte !"); }
                     else
                     {
                         if (ID == 0) { player.giveCard(carte); print("\nLa carte va à " + player.getName() + ".\n"); }
@@ -207,7 +207,7 @@ namespace StupideVautour
                             }
                         }
                     }
-                    if (min == 20) { rejouer = true;  }
+                    if (min == 20) { rejouer = true; print("Égalité ! On rejoue pour la même carte !"); }
                     else
                     {
                         if (ID == 0) { player.giveCard(carte); print("\nLa carte va à " + player.getName() + ".\n"); }
